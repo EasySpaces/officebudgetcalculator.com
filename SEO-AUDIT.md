@@ -182,9 +182,9 @@ No external anchor returned a 4xx or 5xx. The broken resource is the logo image.
 
 Jason approved the wording items below. Applied on `index.html`, `terms/index.html`, the matching `obc-upload` copies, JSON-LD, Twitter text, image alt, and the solution graphic captions. Privacy has none of this text. Calculator math, prices, CTAs, and layout were not changed. GA4 ID `G-3MG1RK27XV` was left as written.
 
-- Tenant representation is now partner language: we work with tenant reps, and partner tenant rep brokers negotiate the lease. The landlord-paid fee stays, attributed to those partners. Terms say the same services are provided by partner tenant rep brokers under a separate written agreement, and the site creates no brokerage or agency relationship.
-- Jason Bowman is labeled President, Easy Spaces, including the card under his name. Don Brewer's testimonial still uses his own role title. That line does not label Jason.
-- Move-in timing is "fast move-in in 2–4 weeks". The stats bar reads "2–4" / "Weeks to move in". The solution graphic caption reads "One call gets you a fast move-in in 2–4 weeks."
+- Tenant representation is partner language. The landlord-paid fee is hedged: "typically at no cost to you", "typically costs you nothing", and "Their fee is typically paid by the landlord, so you usually pay nothing." Terms say those services are provided by partner tenant rep brokers under a separate written agreement, and the site creates no brokerage or agency relationship.
+- Jason Bowman is labeled President, Easy Spaces. Don Brewer's testimonial still uses his own role title. That line does not label Jason.
+- Move-in timing is scoped to after the space is set. The stats bar reads "2–4" / "Weeks to furnished & move-in ready". The solution graphic says "One Partner: One call covers space, furniture, and install. Furnished and move-in ready in 2–4 weeks once your space is set." The final line and Twitter description say furnished and move-in ready in as little as 2–4 weeks. The page title is "Phoenix & Las Vegas Office Furniture Cost Calculator | Easy Spaces", matched on `og:title` and `twitter:title`. JSON-LD `name` values stay "Office Budget Calculator" and "Easy Spaces" because they do not mirror that title. `og:description` does not carry the timing line, so it was left as written.
 - San Diego is only the calculator option "San Diego — Coming Soon". It is off the footer location lines. JSON-LD `areaServed` is Phoenix, AZ and Las Vegas, NV only. Gilbert stays as a showroom location in the footer, not as a served market in schema. Scottsdale stays only as a testimonial city.
 - Las Vegas case study: the paragraph says the suite sat vacant for 7 months, then had a signed tenant within 18 days after a furnished-lease offer. The stat still says 18 Days. The caption is now "Time to signed tenant". Neither number changed.
 
@@ -223,8 +223,9 @@ No live URL was renamed. No price, CTA, or calculator formula was edited.
 
 ### Wording pass
 
-- Partner language replaced every sentence that presented Easy Spaces as the party negotiating the lease. Jason's card now says President. Move-in copy and the stats bar use 2–4 weeks. San Diego remains only as Coming Soon. The Las Vegas 18 Days caption is "Time to signed tenant".
-- `assets/office-setup.jpg` and the WebP copies in `assets/` and `obc-upload/assets/` had the same caption cards redrawn on the original photo. The rest of the graphic is unchanged.
+- Partner language replaced every sentence that presented Easy Spaces as the party negotiating the lease. Jason's card now says President. San Diego remains only as Coming Soon. The Las Vegas 18 Days caption is "Time to signed tenant".
+- A later wording pass hedged the tenant-rep fee, scoped the 2–4 week line to after the space is set, and set the title to "Phoenix & Las Vegas Office Furniture Cost Calculator | Easy Spaces".
+- `assets/office-setup.jpg`, its WebP, and the `obc-upload/assets` copies had the caption cards redrawn on the same photo. The furniture-subscription card still says zero upfront cost. That claim was left for the owner to confirm.
 
 ## Verification results
 
@@ -314,6 +315,14 @@ After:
 - `/opt/cursor/artifacts/seo-after/measure.json`
 
 A second render pass on 2026-09-25, after the fixes were committed, confirmed the same homepage result: one H1, the title and description above, canonical and `og:image` on the apex, no robots meta, no image missing `alt`, overflow 0 and no controls under 44px at 320, 375, 390, 414, 768, 1280, and 1440. Calculator at 5,000 sq ft and 36 months still returned Buy `$100,000`, rent-to-own `$2,930.56`, subscription `$2,905.56`. Live production was still the pre-fix page (`og:image` still on CloudFront, HTTP still 200).
+
+## Wording verification (Brand Guardian pass, 2026-09-25)
+
+- W3C Nu validator on `index.html`, `privacy/index.html`, and `terms/index.html`: 0 errors.
+- `html-validate` with the same inline-style exceptions: 0 problems on those three pages. The noindex upload homepage still has its older head-pixel and unlabeled-input errors.
+- Homepage JSON-LD parses. Organization `areaServed` is Phoenix, AZ and Las Vegas, NV. One H1. Title, `og:title`, and `twitter:title` are "Phoenix & Las Vegas Office Furniture Cost Calculator | Easy Spaces".
+- Local render: horizontal overflow 0 at 320, 375, and 1440. Calculator at 5,000 sq ft and 36 months still returns Buy `$100,000`, rent-to-own `$2,930.56`, subscription `$2,905.56`, space `$8,750.00/mo`.
+- Remaining zero-upfront claims were not edited. They are listed in the pull request.
 
 ## Wording verification (2026-09-25)
 
