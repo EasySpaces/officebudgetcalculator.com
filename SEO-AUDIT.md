@@ -126,7 +126,7 @@ Examples under ~44px (320px unless noted):
 
 Lighthouse label audit: the range and number inputs are not tied to their visible labels with `for` / `id`.
 
-The solution image alt is a keyword sentence, not a description of the graphic. The graphic itself reads "Work with tenant reps", "Furniture subscription", and "7-28 days". The tracking pixel has no `alt`.
+The solution image alt is a keyword sentence, not a description of the graphic. The graphic itself had a move-in timing line that was later rewritten. The tracking pixel has no `alt`.
 
 ### Performance (Lighthouse 12, live URL, 2026-09-25)
 
@@ -178,18 +178,24 @@ No external anchor returned a 4xx or 5xx. The broken resource is the logo image.
 
 - Intentional `noindex` plus immediate redirect to the homepage. Leave the noindex in place. Keep them out of the sitemap.
 
-## Flagged for owner, not changed
+## Approved wording, applied
 
-- The page says move-in in **7–28 days** (stats bar, final CTA, image, Twitter description, FAQ schema). Preferred language supplied for this audit is "fast move-in in 2–4 weeks". Left as written.
-- Tenant-rep wording is inconsistent. Hero pill and the solution graphic say "Work with tenant reps". Other sentences say "As licensed tenant rep brokers we negotiate your lease" (solution section, calculator CTA, and the "What You Get Back" card). Terms say tenant representation is provided under a separate written agreement with the relevant licensed brokerage. Not rewritten.
-- Jason Bowman is labeled **Founder** on the page. New copy in this project uses **President** only. The visible title was not changed.
-- Footer lists San Diego as a location. The calculator lists San Diego as "Coming Soon".
-- Las Vegas case study label says "Vacancy Duration: 18 Days". The paragraph says the suite was vacant for 7 months and then leased within 18 days.
+Jason approved the wording items below. Applied on `index.html`, `terms/index.html`, the matching `obc-upload` copies, JSON-LD, Twitter text, image alt, and the solution graphic captions. Privacy has none of this text. Calculator math, prices, CTAs, and layout were not changed. GA4 ID `G-3MG1RK27XV` was left as written.
+
+- Tenant representation is now partner language: we work with tenant reps, and partner tenant rep brokers negotiate the lease. The landlord-paid fee stays, attributed to those partners. Terms say the same services are provided by partner tenant rep brokers under a separate written agreement, and the site creates no brokerage or agency relationship.
+- Jason Bowman is labeled President, Easy Spaces, including the card under his name. Don Brewer's testimonial still uses his own role title. That line does not label Jason.
+- Move-in timing is "fast move-in in 2–4 weeks". The stats bar reads "2–4" / "Weeks to move in". The solution graphic caption reads "One call gets you a fast move-in in 2–4 weeks."
+- San Diego is only the calculator option "San Diego — Coming Soon". It is off the footer location lines. JSON-LD `areaServed` is Phoenix, AZ and Las Vegas, NV only. Gilbert stays as a showroom location in the footer, not as a served market in schema. Scottsdale stays only as a testimonial city.
+- Las Vegas case study: the paragraph says the suite sat vacant for 7 months, then had a signed tenant within 18 days after a furnished-lease offer. The stat still says 18 Days. The caption is now "Time to signed tenant". Neither number changed.
+
+## Still flagged, not changed
+
 - "1,833+" is used both as installations and as "Desks Installed".
 - Brand orange `#E8621A` (white text about 3.39:1) and teal `#1B7A7A` fail WCAG AA in several small or bold treatments. Decorative step numbers (`01`–`04`) are intentionally faint (about 1.2:1). Those colors were not recolored, because changing them would change the brand.
-- A source comment says to replace GA4 ID `G-3MG1RK27XV` before launch. The ID is the one in the live page. It was not changed. Confirm it is the production property.
+- A source comment says to confirm GA4 ID `G-3MG1RK27XV` before launch. The ID is the one in the live page. It was not changed.
 - No street address or hours are published, so LocalBusiness rich-result fields that need them stay omitted.
 - Enforce HTTPS and Search Console verification need the owner's GitHub Pages and Search Console access.
+- `obc-upload` LocalBusiness still has `priceRange` and a self `sameAs`. That copy is `noindex`. It was not part of this wording pass beyond the claims above.
 
 ## Files expected to change
 
@@ -214,6 +220,11 @@ No URL slugs will change, so no redirect fallback is required. GitHub Pages stil
 - `.nojekyll` added so GitHub Pages serves the files as static HTML.
 
 No live URL was renamed. No price, CTA, or calculator formula was edited.
+
+### Wording pass
+
+- Partner language replaced every sentence that presented Easy Spaces as the party negotiating the lease. Jason's card now says President. Move-in copy and the stats bar use 2–4 weeks. San Diego remains only as Coming Soon. The Las Vegas 18 Days caption is "Time to signed tenant".
+- `assets/office-setup.jpg` and the WebP copies in `assets/` and `obc-upload/assets/` had the same caption cards redrawn on the original photo. The rest of the graphic is unchanged.
 
 ## Verification results
 
@@ -303,6 +314,14 @@ After:
 - `/opt/cursor/artifacts/seo-after/measure.json`
 
 A second render pass on 2026-09-25, after the fixes were committed, confirmed the same homepage result: one H1, the title and description above, canonical and `og:image` on the apex, no robots meta, no image missing `alt`, overflow 0 and no controls under 44px at 320, 375, 390, 414, 768, 1280, and 1440. Calculator at 5,000 sq ft and 36 months still returned Buy `$100,000`, rent-to-own `$2,930.56`, subscription `$2,905.56`. Live production was still the pre-fix page (`og:image` still on CloudFront, HTTP still 200).
+
+## Wording verification (2026-09-25)
+
+- W3C Nu validator on `index.html`, `privacy/index.html`, and `terms/index.html`: 0 errors.
+- `html-validate` with the same inline-style exceptions as the earlier pass: 0 problems on those three pages. The noindex `obc-upload/index.html` still has its pre-existing head-pixel and unlabeled-input errors. Those were not introduced by this pass.
+- Homepage JSON-LD parses. Organization `areaServed` is Phoenix, AZ and Las Vegas, NV. The upload copy's LocalBusiness `areaServed` matches. One H1 on the homepage.
+- Local render: horizontal overflow 0 at 320, 375, and 1440. Solution image natural width 1179. Calculator at 5,000 sq ft and 36 months still returns Buy `$100,000`, rent-to-own `$2,930.56`, subscription `$2,905.56`, space `$8,750.00/mo`. San Diego still shows the coming-soon state.
+- Repo search excluding `patches/` and archives: the only remaining match for the title word is Don Brewer's testimonial line in `index.html` and `obc-upload/index.html`. It names his role at his company. It does not label Jason. GA4 ID `G-3MG1RK27XV` is unchanged.
 
 ## Search Console
 
