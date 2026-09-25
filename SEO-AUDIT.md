@@ -301,3 +301,20 @@ After:
 - `/opt/cursor/artifacts/seo-after/lighthouse-mobile.report.html`
 - `/opt/cursor/artifacts/seo-after/lighthouse-desktop.report.html`
 - `/opt/cursor/artifacts/seo-after/measure.json`
+
+A second render pass on 2026-09-25, after the fixes were committed, confirmed the same homepage result: one H1, the title and description above, canonical and `og:image` on the apex, no robots meta, no image missing `alt`, overflow 0 and no controls under 44px at 320, 375, 390, 414, 768, 1280, and 1440. Calculator at 5,000 sq ft and 36 months still returned Buy `$100,000`, rent-to-own `$2,930.56`, subscription `$2,905.56`. Live production was still the pre-fix page (`og:image` still on CloudFront, HTTP still 200).
+
+## Search Console
+
+No Search Console property is connected to this repo. `https://officebudgetcalculator.com/google-site-verification.html` returns 404, and there is no `google-site-verification` meta tag. Nothing was invented. Submitting a sitemap does not guarantee indexing or rankings. Google decides both.
+
+Do this after the pull request is merged to `main`, and after Enforce HTTPS is turned on in the GitHub Pages settings for this repo (Settings, Pages, Enforce HTTPS). The certificate is already approved.
+
+1. Open [Google Search Console](https://search.google.com/search-console).
+2. Add a property. Prefer a **Domain** property for `officebudgetcalculator.com` so both `www` and the apex are covered. If DNS access is not available, add a **URL prefix** property for `https://officebudgetcalculator.com/` (the canonical host, not `www`).
+3. Verify it with the method Google shows:
+   - Domain property: add the TXT record Google gives you at the DNS host for `officebudgetcalculator.com`, then click Verify.
+   - URL prefix property: use the HTML tag or HTML file Google gives you. For the tag, add the exact `google-site-verification` meta tag to `index.html`, `privacy/index.html`, and `terms/index.html`, commit it to `main`, wait for Pages to publish, then click Verify. For the file, commit the file Google downloads to the repo root and wait for Pages to publish it at `https://officebudgetcalculator.com/<filename>`.
+4. Open **Sitemaps**. Submit `sitemap.xml` (the full URL is `https://officebudgetcalculator.com/sitemap.xml`).
+5. Open **URL inspection**. Enter `https://officebudgetcalculator.com/`. If the page is not indexed, choose **Request indexing**. Repeat for `https://officebudgetcalculator.com/privacy/` and `https://officebudgetcalculator.com/terms/` if you want those inspected too.
+6. Check the inspection result later. "URL is on Google" means it was indexed. A crawl or sitemap submission only asks Google to look. It does not promise a ranking.
