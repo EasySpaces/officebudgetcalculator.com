@@ -205,11 +205,76 @@ No URL slugs will change, so no redirect fallback is required. GitHub Pages stil
 
 ## What changed
 
-Not started. This file is the pre-change audit.
+- `index.html`: local logo (`/assets/logo.svg`) and home link; 1200×630 `og:image` on this host with type, width, height, and alt; one Schema.org `@graph` (WebSite, WebApplication, Organization) with no FAQ, price range, self `sameAs`, address, hours, or ratings; calculator labels and 44px controls; readable helper text on light backgrounds; hero photo uses WebP with a JPEG fallback and is preloaded, not lazy-loaded; GA4 and the Meta Pixel wait until `window.load`. Measurement IDs are unchanged. Calculator constants are unchanged.
+- `assets/logo.svg` and `assets/og-image.jpg` added. The social image is 1200×630 JPEG, 102,704 bytes, made from `assets/office-setup-hero.jpg` and facts already on the page (Phoenix and Las Vegas, compare buy / rent-to-own / subscription, from $349/month, $0 upfront).
+- `privacy/index.html` and `terms/index.html`: Open Graph and Twitter tags, `tel:` links, 44px link targets.
+- `robots.txt`: still allows `/` and assets, still points at the sitemap, and disallows `/patches/`, `/supplied-files.tar.gz`, and `/HOW_TO_APPLY.md`. `/obc-upload/` is allowed so crawlers can see `noindex`.
+- `sitemap.xml`: same three canonical HTTPS URLs. `lastmod` set to 2026-09-25.
+- `obc-upload/index.html`, `obc-upload/privacy/index.html`, `obc-upload/terms/index.html`: `noindex, nofollow`. The about, services, and office-space stubs were already `noindex` and were left that way.
+- `.nojekyll` added so GitHub Pages serves the files as static HTML.
+
+No live URL was renamed. No price, CTA, or calculator formula was edited.
 
 ## Verification results
 
-Baseline only. See the tables above. Before screenshots and Lighthouse reports:
+The repo has no build, lint, or test script.
+
+### HTML and structured data
+
+- W3C Nu validator (`https://validator.w3.org/nu/?out=json`) on `index.html`, `privacy/index.html`, and `terms/index.html`: **0 errors**. The only note is the existing trailing slash on void elements.
+- `html-validate` recommended rules, with the pre-existing inline-style and void-slash rules turned off: **0 problems** on those three pages. The default preset reports 514 issues, almost all `no-inline-style` and `void-style` on markup that was already inline. Those were not rewritten, because doing so would be a restyle of the page.
+- Homepage JSON-LD parses as one `@graph`. Types: `WebSite`, `WebApplication`, `Organization`. Properties used are on schema.org (`url`, `name`, `description`, `inLanguage`, `publisher`, `applicationCategory`, `operatingSystem`, `browserRequirements`, `offers` / `Offer.price` / `priceCurrency`, `provider`, `isPartOf`, `telephone`, `email`, `areaServed`, `logo` as `ImageObject` with `url`, `width`, `height`). No review, rating, `priceRange`, address, or hours. `sitemap.xml` parses as a urlset of the three canonical HTTPS URLs.
+
+### Local server (this branch, `python3 -m http.server`, port 8765)
+
+Python does not send an `x-robots-tag`. The live GitHub Pages responses also had none.
+
+| Check | Result |
+| --- | --- |
+| Title | Office Furniture Phoenix & Las Vegas Cost Calculator \| Easy Spaces |
+| Meta description | Office furniture Phoenix & Las Vegas cost calculator. Compare buying vs. rent-to-own vs. subscription. 1,833+ installs. From $349/mo. |
+| Canonical and `og:url` | `https://officebudgetcalculator.com/` |
+| `og:image` | `https://officebudgetcalculator.com/assets/og-image.jpg` (local file 200, `image/jpeg`, 1200×630) |
+| Robots meta | none on `/`, `/privacy/`, `/terms/` |
+| H1 | 1 on home, privacy, and terms |
+| Heading outline | h1, then h2, then h3. 22 headings. No skipped level. |
+| Images missing `alt` | none. Hero and the nav logo use `alt=""`. The solution graphic and footer logo have text. |
+| Internal links | `/`, `/privacy/`, `/terms/` return 200. 19 Calendly links, 2 `tel:` links, 1 mailto, 1 easyspaces.info link remain. |
+| `/about/`, `/services/`, `/office-space/` source | `noindex` plus redirect to the apex. Not in the sitemap. |
+| `/obc-upload/` source | `noindex, nofollow` |
+| `robots.txt` | Allow `/`, disallow the archive, apply notes, and `patches/`, sitemap line present |
+| Calculator at 375px, 5,000 sq ft, 36 months | Buy `$100,000`, rent-to-own `$2,930.56`, subscription `$2,905.56`, space `$8,750.00/mo`. Same as the live baseline. San Diego still shows coming soon. |
+
+Playwright horizontal overflow (`scrollWidth` minus `clientWidth`) after the fix was **0** at 320, 375, 390, 414, 768, 1280, and 1440. Controls under 44px in either dimension: **0** at each of those widths (was 20–22). Privacy at 320 and 375, and terms at 390 and 1280, also had overflow 0, one H1, and no undersized links.
+
+The decorative `$$$` still extends past the calculator box and is clipped. It does not create a scrollbar.
+
+### Lighthouse
+
+Before: live `https://officebudgetcalculator.com/`. After: `http://127.0.0.1:8765/` on this branch. Same Lighthouse version and Chrome. Local TTFB is not the GitHub CDN, so small FCP moves are not a production prediction. CLS and accessibility moved with the code changes.
+
+| | Mobile before | Mobile after | Desktop before | Desktop after |
+| --- | --- | --- | --- | --- |
+| Performance | 0.84 | 0.89 | 0.85 | 0.98 |
+| Accessibility | 0.74 | 0.96 | 0.74 | 0.96 |
+| Best practices | 1.00 | 0.79 | 0.78 | 1.00 |
+| SEO | 1.00 | 1.00 | 1.00 | 1.00 |
+| FCP | 1.8 s | 2.0 s | 0.5 s | 0.8 s |
+| LCP | 3.3 s | 2.7 s | 0.9 s | 0.8 s |
+| TBT | 350 ms | 270 ms | 10 ms | 0 ms |
+| CLS | 0.046 | 0.024 | 0.281 | 0.056 |
+| Speed Index | 1.8 s | 2.0 s | 0.5 s | 0.8 s |
+| TTI | 5.7 s | 5.9 s | 0.9 s | 1.0 s |
+
+After the fix, label, link-name, and select-name audits pass. The only accessibility failure left is color contrast on brand orange `#E8621A`, brand teal `#1B7A7A`, the faint step numbers, and the muted footer. Those were not recolored. Best-practices drops on mobile are third-party cookies from GA4 and the Meta Pixel, which are still on the page.
+
+### External links (live curl, 2026-09-25)
+
+No external anchor returned 4xx or 5xx. Calendly inquiry, easyspaces.info, the Google Fonts CSS file, GA4, and the Meta Pixel returned 200. `https://calendly.com/privacy` redirects to `https://calendly.com/legal/privacy-notice` (200). The CloudFront logo PNG returns **403**. The old CloudFront social PNG returns 200 but is 6.9 MB and 2752×1536; the page no longer references it.
+
+### Artifacts
+
+Before:
 
 - `/opt/cursor/artifacts/seo-before/home-320.png`
 - `/opt/cursor/artifacts/seo-before/home-375.png`
@@ -219,9 +284,20 @@ Baseline only. See the tables above. Before screenshots and Lighthouse reports:
 - `/opt/cursor/artifacts/seo-before/home-1280.png`
 - `/opt/cursor/artifacts/seo-before/home-1440.png`
 - `/opt/cursor/artifacts/seo-before/lighthouse-mobile.report.html`
-- `/opt/cursor/artifacts/seo-before/lighthouse-mobile.report.json`
 - `/opt/cursor/artifacts/seo-before/lighthouse-desktop.report.html`
-- `/opt/cursor/artifacts/seo-before/lighthouse-desktop.report.json`
 - `/opt/cursor/artifacts/seo-before/measure.json`
 
-After-fix checks will be appended here once the code changes exist.
+After:
+
+- `/opt/cursor/artifacts/seo-after/home-320.png`
+- `/opt/cursor/artifacts/seo-after/home-375.png`
+- `/opt/cursor/artifacts/seo-after/home-390.png`
+- `/opt/cursor/artifacts/seo-after/home-414.png`
+- `/opt/cursor/artifacts/seo-after/home-768.png`
+- `/opt/cursor/artifacts/seo-after/home-1280.png`
+- `/opt/cursor/artifacts/seo-after/home-1440.png`
+- `/opt/cursor/artifacts/seo-after/privacy-375.png`
+- `/opt/cursor/artifacts/seo-after/terms-1280.png`
+- `/opt/cursor/artifacts/seo-after/lighthouse-mobile.report.html`
+- `/opt/cursor/artifacts/seo-after/lighthouse-desktop.report.html`
+- `/opt/cursor/artifacts/seo-after/measure.json`
