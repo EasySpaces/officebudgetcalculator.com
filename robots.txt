@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /patches/
-Disallow: /supplied-files.tar.gz
-Disallow: /HOW_TO_APPLY.md
 
 Sitemap: https://officebudgetcalculator.com/sitemap.xml
