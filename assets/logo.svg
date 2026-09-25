@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 44" role="img">
+  <title>Easy Spaces</title>
+  <g transform="translate(0 2) scale(0.625)">
+    <path d="M16 44V20h8v16h16v8H16Zm18 0V20h8v24h-8Z" fill="#E8621A"/>
+  </g>
+  <text x="50" y="30" fill="#FFFFFF" font-family="Barlow, Inter, Arial, sans-serif" font-weight="800" font-size="22">Easy Spaces</text>
+</svg>
