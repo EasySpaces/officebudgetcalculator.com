@@ -183,11 +183,11 @@ test('12-month term, price floors, and the subscription comparison note', () => 
   assert.match(usedCard, /Typical price: \$12 per sq ft/);
   assert.match(usedCard, /Typical one-time total/);
   assert.match(usedCard, /Delivery and installation quoted separately/);
+  assert.match(usedCard, /Limited inventory\. Availability varies\./);
   assert.equal(usedCard.includes('Installation not included'), false);
-  assert.equal(/max|guaranteed/i.test(usedCard), false);
+  assert.equal(/max|guaranteed|warranty|quality|condition/i.test(usedCard), false);
   assert.equal(html.includes('Most Popular'), false);
   assert.equal(html.includes('Higher total cost'), false);
-  assert.equal(html.includes('limited inventory'), false);
   assert.match(
     html,
     /This free calculator compares buying outright, rent-to-own, an Easy Spaces subscription and used furniture side by side, so you can see your numbers before you commit\./
