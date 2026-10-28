@@ -1,7 +1,7 @@
 /**
  * Confirms the calculator result placeholders in index.html match what
  * calcUpdate() writes for the default inputs (Phoenix Metro, 3000 sqft,
- * 24 months, needs space). Runs the page's own script; does not reimplement
+ * 60 months, needs space). Runs the page's own script; does not reimplement
  * pricing.
  *
  * Usage: node --test scripts/check-calc-placeholders.js
@@ -145,7 +145,7 @@ test('used furniture is sqft x $12 and does not change the other options', () =>
   const button = element();
 
   // Existing Buy Outright ($20/sqft), rent-to-own (x 1.055), and subscription (x 1.046)
-  // at the 24-month default, checked at several square footages.
+  // totals, which do not depend on the 60-month default, checked at several square footages.
   const cases = [1000, 1500, 2500, 3000, 5000, 10000, 20000];
   for (const sqft of cases) {
     sandbox.syncSqft(sqft);
