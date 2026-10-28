@@ -145,8 +145,8 @@ test('used furniture is sqft x $12 and buy outright stays $20 per square foot', 
   for (const sqft of cases) {
     sandbox.syncSqft(sqft);
     const buy = sqft * 20;
-    const rtoMonthly = Math.max((buy * 1.055) / 60, 349);
-    const subMonthly = Math.max((buy * 1.046) / 60, 379);
+    const rtoMonthly = Math.max((buy * 1.047) / 60, 349);
+    const subMonthly = Math.max((buy * 1.137) / 60, 379);
     assert.equal(elements['buy-total'].textContent, roundMoney(buy));
     assert.equal(elements['rto-total'].textContent, 'Total: ' + roundMoney(rtoMonthly * 60));
     assert.equal(elements['sub-total'].textContent, 'Total: ' + roundMoney(subMonthly * 60));
@@ -177,11 +177,14 @@ test('12-month term, price floors, and the subscription comparison note', () => 
   const button = element();
   const cases = {
     '1000:12': ['$20,000', '$1,758.33', 'Total: $21,100', '$1,743.33', 'Total: $20,920', '$12,000', ''],
-    '1000:60': ['$20,000', '$351.67', 'Total: $21,100', '$379.00', 'Total: $22,740', '$12,000', 'none'],
+    '1000:60': ['$20,000', '$349.00', 'Total: $20,940', '$379.00', 'Total: $22,740', '$12,000', 'none'],
     '3000:12': ['$60,000', '$5,275.00', 'Total: $63,300', '$5,230.00', 'Total: $62,760', '$36,000', ''],
-    '3000:60': ['$60,000', '$1,055.00', 'Total: $63,300', '$1,046.00', 'Total: $62,760', '$36,000', ''],
+    '3000:24': ['$60,000', '$3,250.00', 'Total: $78,000', '$3,625.00', 'Total: $87,000', '$36,000', 'none'],
+    '3000:36': ['$60,000', '$2,000.00', 'Total: $72,000', '$2,200.00', 'Total: $79,200', '$36,000', 'none'],
+    '3000:48': ['$60,000', '$1,400.00', 'Total: $67,200', '$1,525.00', 'Total: $73,200', '$36,000', 'none'],
+    '3000:60': ['$60,000', '$1,047.00', 'Total: $62,820', '$1,137.00', 'Total: $68,220', '$36,000', 'none'],
     '10000:12': ['$200,000', '$17,583.33', 'Total: $211,000', '$17,433.33', 'Total: $209,200', '$120,000', ''],
-    '10000:60': ['$200,000', '$3,516.67', 'Total: $211,000', '$3,486.67', 'Total: $209,200', '$120,000', ''],
+    '10000:60': ['$200,000', '$3,490.00', 'Total: $209,400', '$3,790.00', 'Total: $227,400', '$120,000', 'none'],
   };
 
   for (const [key, expected] of Object.entries(cases)) {
