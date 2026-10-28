@@ -222,6 +222,11 @@
     }
     .toggle-btn:hover { border-color: #1B7A7A; color: #1B7A7A; }
     .toggle-btn.active { background-color: #1B7A7A; border-color: #1B7A7A; color: white; }
+    .term-field { container-type: inline-size; }
+    .term-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    @container (max-width: 360px) {
+      .term-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+    }
     .yn-btn {
       padding: 0.5rem 1.5rem;
       border: 2px solid #E8ECF0;
@@ -540,11 +545,10 @@
             </div>
           </div>
           <!-- Term -->
-          <div>
+          <div class="term-field">
             <p id="term-label" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">What is your office lease term?</p>
             <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Longer terms = lower monthly payments</p>
-            <div role="group" aria-labelledby="term-label" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-              <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(12,this)">12 mo</button>
+            <div role="group" aria-labelledby="term-label" class="term-buttons">
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(24,this)">24 mo</button>
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(36,this)">36 mo</button>
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(48,this)">48 mo</button>
@@ -602,8 +606,8 @@
               </div>
               <div style="text-align:center;padding:0.75rem;background:#F4F6F8;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#4B5563;margin-bottom:0.25rem;">Monthly Payment</p>
-                <p id="rto-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$1,055.00</p>
-                <p id="rto-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $63,300</p>
+                <p id="rto-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$1,047.00</p>
+                <p id="rto-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $62,820</p>
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Spread over time</span></div>
@@ -620,8 +624,8 @@
               </div>
               <div style="text-align:center;padding:0.75rem;background:#E8F5F5;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#1B7A7A;margin-bottom:0.25rem;">Monthly Payment</p>
-                <p id="sub-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#1B7A7A;">$1,046.00</p>
-                <p id="sub-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $62,760</p>
+                <p id="sub-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#1B7A7A;">$1,137.00</p>
+                <p id="sub-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $68,220</p>
               </div>
               <div style="font-size:0.8rem;color:#374151;display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">$0 upfront</span></div>
@@ -649,7 +653,7 @@
           </div>
 
           <p style="font-size:0.75rem;text-align:center;color:#4B5563;margin-bottom:0.5rem;">Rent-to-own delivery &amp; install are quoted separately.<span id="sub-lower-note"> Subscription is lower because the furniture comes back at lease end.</span></p>
-          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Furniture planning estimates use a $20/sq ft purchase baseline and simplified term factors. Used furniture uses a typical price of $12 per square foot, and delivery and installation are quoted separately. Buy Outright shows a budget maximum. Used furniture shows a typical price. They are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
+          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Furniture planning estimates use a $20/sq ft purchase baseline and per-term factors. Used furniture uses a typical price of $12 per square foot, and delivery and installation are quoted separately. Buy Outright shows a budget maximum. Used furniture shows a typical price. They are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
         </div>
       </div>
     </div>
@@ -1073,14 +1077,14 @@
 <script>
 // ── Constants ──────────────────────────────────────────────────
 
-// Furniture math (verified against the live calculator at interioravenue.net/#estimate):
-// Purchase is a flat $20/sqft. Rent-to-Own and Subscription are each a fixed total
-// premium over that purchase price - NOT a per-term lookup table - divided evenly
-// across whichever term is selected. RTO carries a larger premium than Subscription,
-// Subscription is usually lower; the floors can reverse this on small offices.
-const BUY_RATE        = 20;    // $/sqft one-time purchase price
-const RTO_MULTIPLIER  = 1.055; // RTO total cost = 105.5% of the purchase price
-const SUB_MULTIPLIER  = 1.046; // Subscription total cost = 104.6% of the purchase price
+// Furniture math matches easyspaces.online calculator.js:
+// buy total = sqft * $20. For 24, 36, 48, and 60 months,
+// monthly = (buy total * per-term factor) / months, then the monthly floor.
+// Rent-to-own factors: 24: 1.30, 36: 1.20, 48: 1.12, 60: 1.047.
+// Subscription factors: 24: 1.45, 36: 1.32, 48: 1.22, 60: 1.137.
+const BUY_RATE        = 20;    // $/sqft one-time purchase price, the base total
+const RTO_TOTAL_MARKUP = { 24: 1.30, 36: 1.20, 48: 1.12, 60: 1.047 };
+const SUB_TOTAL_MARKUP = { 24: 1.45, 36: 1.32, 48: 1.22, 60: 1.137 };
 const USED_RATE       = 12;    // typical $/sqft used furniture price, not a maximum. Delivery and installation quoted separately.
 
 // Displayed monthly floors (approved 2026-10-20): rent-to-own from $349/mo, subscription from $379/mo
@@ -1155,13 +1159,14 @@ function calcUpdate() {
 
   if (!isActive) return;
 
-  // Buy outright
+  // Buy outright is the base total. Same structure as easyspaces.online calculator.js:
+  // monthly = (base total * per-term factor) / months, with a monthly floor.
   const buyTotal    = sqft * BUY_RATE;
-  // RTO: fixed total premium over the purchase price, spread evenly across the term
-  const rtoMonthly  = Math.max((buyTotal * RTO_MULTIPLIER) / term, RTO_MIN_MONTHLY);
+  const rtoMarkup   = RTO_TOTAL_MARKUP[term];
+  const subMarkup   = SUB_TOTAL_MARKUP[term];
+  const rtoMonthly  = Math.max((buyTotal * rtoMarkup) / term, RTO_MIN_MONTHLY);
   const rtoTotal    = rtoMonthly * term;
-  // Subscription: fixed total premium over the purchase price, spread evenly across the term
-  const subMonthly  = Math.max((buyTotal * SUB_MULTIPLIER) / term, SUB_MIN_MONTHLY);
+  const subMonthly  = Math.max((buyTotal * subMarkup) / term, SUB_MIN_MONTHLY);
   const subTotal    = subMonthly * term;
   const usedTotal   = sqft * USED_RATE;
   const subNote = document.getElementById('sub-lower-note');
