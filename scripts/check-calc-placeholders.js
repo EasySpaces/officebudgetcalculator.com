@@ -139,23 +139,27 @@ test('static calculator placeholders match calcUpdate() for the default inputs',
   }
 });
 
-test('used furniture is sqft x $12 and does not change the other options', () => {
+function roundMoney(n) {
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+
+test('used furniture is sqft x $12 and buy outright stays $20 per square foot', () => {
   const html = fs.readFileSync(HTML_PATH, 'utf8');
   const { elements, sandbox } = loadCalculator(html);
   const button = element();
 
-  // Existing Buy Outright ($20/sqft), rent-to-own (x 1.055), and subscription (x 1.046)
-  // totals, which do not depend on the 60-month default, checked at several square footages.
+  // Default term is 60 months. Displayed rent-to-own and subscription totals
+  // are the floored monthly times that term.
   const cases = [1000, 1500, 2500, 3000, 5000, 10000, 20000];
   for (const sqft of cases) {
     sandbox.syncSqft(sqft);
     const buy = sqft * 20;
-    const rto = buy * 1.055;
-    const sub = buy * 1.046;
-    assert.equal(elements['buy-total'].textContent, '$' + buy.toLocaleString('en-US'));
-    assert.equal(elements['rto-total'].textContent, 'Total: $' + Math.round(rto).toLocaleString('en-US'));
-    assert.equal(elements['sub-total'].textContent, 'Total: $' + Math.round(sub).toLocaleString('en-US'));
-    assert.equal(elements['used-total'].textContent, '$' + (sqft * 12).toLocaleString('en-US'));
+    const rtoMonthly = Math.max((buy * 1.055) / 60, 349);
+    const subMonthly = Math.max((buy * 1.046) / 60, 379);
+    assert.equal(elements['buy-total'].textContent, roundMoney(buy));
+    assert.equal(elements['rto-total'].textContent, 'Total: ' + roundMoney(rtoMonthly * 60));
+    assert.equal(elements['sub-total'].textContent, 'Total: ' + roundMoney(subMonthly * 60));
+    assert.equal(elements['used-total'].textContent, roundMoney(sqft * 12));
     assert.equal(elements['sqft-input'].value, sqft);
   }
 
@@ -164,4 +168,53 @@ test('used furniture is sqft x $12 and does not change the other options', () =>
   assert.equal(elements['buy-total'].textContent, '$400,000', 'buy outright ignores the lease term');
   sandbox.syncSqft(3000);
   assert.equal(elements['used-total'].textContent, '$36,000');
+});
+
+test('12-month term, price floors, and the subscription comparison note', () => {
+  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  assert.match(html, /onclick="setTerm\(12,this\)">12 mo/);
+  assert.match(html, /class="toggle-btn active" aria-pressed="true" onclick="setTerm\(60,this\)">60 mo/);
+  assert.match(html, /id="sub-lower-note"[^>]*>Subscription is lower because the furniture comes back at lease end</);
+  assert.match(html, /from 12 months/);
+  assert.match(html, /Delivery and install built into your monthly price/);
+  assert.match(html, /Removal at lease end at no charge/);
+  assert.match(html, /Delivery and install quoted separately/);
+  assert.match(html, /Installation not included/);
+  assert.equal(html.includes('Most Popular'), false);
+  assert.equal(html.includes('Higher total cost'), false);
+  assert.equal(html.includes('limited inventory'), false);
+  assert.match(
+    html,
+    /This free calculator compares buying outright, rent-to-own, an Easy Spaces subscription and used furniture side by side, so you can see your numbers before you commit\./
+  );
+
+  const { elements, sandbox } = loadCalculator(html);
+  const button = element();
+  const cases = {
+    '1000:12': ['$20,000', '$1,758.33', 'Total: $21,100', '$1,743.33', 'Total: $20,920', '$12,000', 'block'],
+    '1000:60': ['$20,000', '$351.67', 'Total: $21,100', '$379.00', 'Total: $22,740', '$12,000', 'none'],
+    '3000:12': ['$60,000', '$5,275.00', 'Total: $63,300', '$5,230.00', 'Total: $62,760', '$36,000', 'block'],
+    '3000:60': ['$60,000', '$1,055.00', 'Total: $63,300', '$1,046.00', 'Total: $62,760', '$36,000', 'block'],
+    '10000:12': ['$200,000', '$17,583.33', 'Total: $211,000', '$17,433.33', 'Total: $209,200', '$120,000', 'block'],
+    '10000:60': ['$200,000', '$3,516.67', 'Total: $211,000', '$3,486.67', 'Total: $209,200', '$120,000', 'block'],
+  };
+
+  for (const [key, expected] of Object.entries(cases)) {
+    const [sqft, term] = key.split(':').map(Number);
+    sandbox.syncSqft(sqft);
+    sandbox.setTerm(term, button);
+    assert.deepEqual(
+      [
+        elements['buy-total'].textContent,
+        elements['rto-monthly'].textContent,
+        elements['rto-total'].textContent,
+        elements['sub-monthly'].textContent,
+        elements['sub-total'].textContent,
+        elements['used-total'].textContent,
+        elements['sub-lower-note'].style.display,
+      ],
+      expected,
+      key
+    );
+  }
 });
