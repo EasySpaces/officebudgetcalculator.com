@@ -244,21 +244,14 @@
     @media (max-width: 1100px) {
       .calc-cols { grid-template-columns: 1fr 1fr; }
     }
-    .featured-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #E8621A;
-      color: white;
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      white-space: nowrap;
+    :focus-visible {
+      outline: 3px solid #E8621A;
+      outline-offset: 3px;
+    }
+    .es-btn-primary:focus-visible,
+    .toggle-btn.active:focus-visible,
+    .yn-btn.active:focus-visible {
+      outline-color: #12192C;
     }
 
     /* ── Grid helpers ── */
@@ -494,7 +487,7 @@
       <div class="reveal" style="position:relative;border-radius:1rem;overflow:hidden;aspect-ratio:1179/682;box-shadow:0 4px 24px rgba(0,0,0,0.1);">
         <picture>
           <source srcset="assets/office-setup.webp" type="image/webp" />
-          <img src="assets/office-setup.jpg" alt="Three-panel graphic: work with tenant reps, typically at no cost to you, and their fee is typically paid by the landlord. Furniture subscription with zero upfront cost. One Partner: One call covers space, furniture, and install. Furnished and move-in ready in 2–4 weeks once your space is set." style="width:100%;height:100%;object-fit:contain;background:white;" loading="lazy" width="1179" height="682" />
+          <img src="assets/office-setup.jpg" alt="Three-panel graphic: work with tenant reps, typically at no cost to you, and their fee is typically paid by the landlord. Furniture subscription with zero upfront cost. One Partner: One call covers space, furniture, and install. Furnished and move-in ready in 2 to 4 weeks once your space is set." style="width:100%;height:100%;object-fit:contain;background:white;" loading="lazy" width="1179" height="682" />
         </picture>
       </div>
     </div>
@@ -525,7 +518,7 @@
           <!-- Sqft -->
           <div>
             <label id="sqft-label" for="sqft-input" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">How many square feet is your office space?</label>
-            <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Not sure? A good rule of thumb is 150–200 sq ft per employee.</p>
+            <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Not sure? A good rule of thumb is 150 to 200 sq ft per employee.</p>
             <div style="display:flex;align-items:center;gap:0.75rem;">
               <input type="range" id="sqft-slider" min="1000" max="20000" step="100" value="3000" aria-labelledby="sqft-label" style="flex:1;accent-color:#1B7A7A;" oninput="syncSqft(this.value)" />
               <input type="number" id="sqft-input" min="1000" max="20000" value="3000" style="width:6rem;border:2px solid #1B7A7A;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;font-weight:700;font-size:0.875rem;font-family:'Barlow',sans-serif;color:#12192C;" oninput="syncSqft(Math.min(20000,Math.max(1000,parseInt(this.value)||1000)))" />
@@ -597,7 +590,7 @@
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Large capital outlay</span></div>
-                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>6–12 week lead time</span></div>
+                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>6 to 12 week lead time</span></div>
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>You handle removal</span></div>
               </div>
             </div>
@@ -614,7 +607,7 @@
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Spread over time</span></div>
-                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Higher total cost</span></div>
+                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Delivery and install quoted separately</span></div>
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>You own it at end</span></div>
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>No removal included</span></div>
               </div>
@@ -634,7 +627,7 @@
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">$0 upfront</span></div>
                 <hr style="border-color:#C6E8E8;" />
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">Delivery and install built into your monthly price</span></div>
-                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">Removal at lease end, no charge</span></div>
+                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">Removal at lease end at no charge</span></div>
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">Terms from 12 months</span></div>
               </div>
             </div>
@@ -660,7 +653,7 @@
           </div>
 
           <p style="font-size:0.75rem;text-align:center;color:#4B5563;margin-bottom:0.5rem;">Rent-to-own delivery &amp; install are quoted separately.<span id="sub-lower-note"> Subscription is lower because the furniture comes back at lease end.</span></p>
-          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Furniture planning estimates use a $20/sq ft purchase baseline and simplified term factors. Used furniture uses a typical price of $12 per square foot, and delivery and installation are quoted separately. They are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
+          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Furniture planning estimates use a $20/sq ft purchase baseline and simplified term factors. Used furniture uses a typical price of $12 per square foot, and delivery and installation are quoted separately. Buy Outright shows a budget maximum. Used furniture shows a typical price. They are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
         </div>
       </div>
     </div>
@@ -777,24 +770,24 @@
         </p>
         <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem;">
           <div class="bench-row">
-            <span style="color:rgba(255,255,255,0.75);">Small office (1,000–2,500 sq ft)</span>
+            <span style="color:rgba(255,255,255,0.75);">Small office (1,000 to 2,500 sq ft)</span>
             <div style="display:flex;gap:1.5rem;text-align:right;">
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$18K–$50K</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$20K to $50K</p></div>
               <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">Ask us</p></div>
             </div>
           </div>
           <div class="bench-row">
-            <span style="color:rgba(255,255,255,0.75);">Mid-size office (2,500–7,500 sq ft)</span>
+            <span style="color:rgba(255,255,255,0.75);">Mid-size office (2,500 to 7,500 sq ft)</span>
             <div style="display:flex;gap:1.5rem;text-align:right;">
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$50K–$150K</p></div>
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">$872–$2,615/mo</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$50K to $150K</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">$872 to $2,615/mo</p></div>
             </div>
           </div>
           <div class="bench-row">
-            <span style="color:rgba(255,255,255,0.75);">Large office (7,500–20,000 sq ft)</span>
+            <span style="color:rgba(255,255,255,0.75);">Large office (7,500 to 20,000 sq ft)</span>
             <div style="display:flex;gap:1.5rem;text-align:right;">
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$150K–$400K</p></div>
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">$2,615–$6,973/mo</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$150K to $400K</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">$2,615 to $6,973/mo</p></div>
             </div>
           </div>
         </div>
@@ -869,8 +862,8 @@
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:1rem;padding:2rem;" class="reveal">
         <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1.1rem;color:#EF4444;margin-bottom:1.5rem;">❌ The Old Way (Buying)</p>
         <div style="display:flex;flex-direction:column;gap:0.75rem;">
-          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>$20,000–$100,000 upfront capital expense</div>
-          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>6–12 week wait for delivery</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Large upfront capital expense</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>6 to 12 week wait for delivery</div>
           <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>You coordinate multiple vendors</div>
           <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>What happens when you grow or downsize?</div>
         </div>

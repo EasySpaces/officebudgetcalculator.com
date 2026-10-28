@@ -1,6 +1,6 @@
 # Easy Spaces Office Budget Calculator
 
-> Free office furniture cost calculator for Phoenix and Las Vegas businesses by Easy Spaces. Compare buying outright, rent-to-own and subscription.
+> Free office furniture cost calculator for Phoenix and Las Vegas businesses by Easy Spaces. Compare buying outright, rent-to-own, subscription, and used furniture.
 
 Key facts:
 - Rent-to-own: from $349/mo, $0 upfront. Delivery & install quoted separately.
@@ -18,7 +18,7 @@ Key facts:
 - Installed to date: 26,923+ chairs and 1,833+ desks.
 
 ## Pages
-- [Office Budget Calculator](https://officebudgetcalculator.com/): compare buy, rent-to-own and subscription costs
+- [Office Budget Calculator](https://officebudgetcalculator.com/): compare buy, rent-to-own, subscription, and used furniture costs
 - [Office Furniture Cost per Square Foot](https://officebudgetcalculator.com/office-furniture-cost-per-square-foot/)
 - [Services](https://officebudgetcalculator.com/services/)
 - [Office Furniture Subscription](https://officebudgetcalculator.com/services/office-furniture-subscription/)
