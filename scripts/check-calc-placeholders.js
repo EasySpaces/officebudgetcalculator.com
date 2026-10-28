@@ -179,7 +179,11 @@ test('12-month term, price floors, and the subscription comparison note', () => 
   assert.match(html, /Delivery and install built into your monthly price/);
   assert.match(html, /Removal at lease end at no charge/);
   assert.match(html, /Delivery and install quoted separately/);
-  assert.match(html, /Installation not included/);
+  const usedCard = html.slice(html.indexOf('<!-- Used furniture -->'), html.indexOf('<!-- Space estimate row -->'));
+  assert.match(usedCard, /Typical price: \$12 per sq ft/);
+  assert.match(usedCard, /Typical one-time total/);
+  assert.match(usedCard, /Installation not included/);
+  assert.equal(/max|guaranteed/i.test(usedCard), false);
   assert.equal(html.includes('Most Popular'), false);
   assert.equal(html.includes('Higher total cost'), false);
   assert.equal(html.includes('limited inventory'), false);
