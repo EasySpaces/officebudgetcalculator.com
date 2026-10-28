@@ -673,7 +673,7 @@
                 <p id="used-total" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$36,000</p>
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
-                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Installation not included</span></div>
+                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Delivery and installation quoted separately</span></div>
               </div>
             </div>
           </div>
@@ -693,7 +693,7 @@
             <p style="font-size:0.75rem;color:#4B5563;line-height:1.6;margin-top:0.75rem;">Space cost reflects the estimated metro average of $1.75/sq ft. Actual rates vary by location, building class, and lease terms. We'll give you exact numbers on your call — free, no obligation.</p>
           </div>
 
-          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Buy Outright, rent-to-own, and subscription estimates use a $20/sq ft purchase baseline and simplified term factors. Used furniture uses a typical price of $12 per square foot, one-time, and installation is not included. These figures are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
+          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Buy Outright, rent-to-own, and subscription estimates use a $20/sq ft purchase baseline and simplified term factors. Used furniture uses a typical price of $12 per square foot, one-time, and delivery and installation are quoted separately. These figures are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
         </div>
       </div>
     </div>
@@ -1231,7 +1231,7 @@ const SPACE_RATE = 1.75; // $/sqft/month — estimated office lease cost
 const BUY_RATE          = 20;    // $/sqft one-time purchase price
 const RTO_MULTIPLIER    = 1.055; // RTO total cost = 105.5% of the purchase price
 const SUB_MULTIPLIER    = 1.046; // Subscription total cost = 104.6% of the purchase price
-const USED_RATE         = 12;    // typical $/sqft used furniture price, not a maximum. Installation not included.
+const USED_RATE         = 12;    // typical $/sqft used furniture price, not a maximum. Delivery and installation quoted separately.
 const RTO_MONTHLY_FLOOR = 349;   // rent-to-own monthly is never below $349
 const SUB_MONTHLY_FLOOR = 379;   // subscription monthly is never below $379
 
