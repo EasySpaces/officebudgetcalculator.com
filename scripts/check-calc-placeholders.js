@@ -155,10 +155,14 @@ test('used furniture is sqft x $12 and buy outright stays $20 per square foot', 
   }
 });
 
-test('12-month term, price floors, and the subscription comparison note', () => {
+test('term buttons, price floors, and the subscription comparison note', () => {
   const html = fs.readFileSync(HTML_PATH, 'utf8');
-  assert.match(html, /onclick="setTerm\(12,this\)">12 mo/);
+  assert.equal(/setTerm\(12|>12 mo</.test(html), false);
+  assert.match(html, /onclick="setTerm\(24,this\)">24 mo/);
+  assert.match(html, /onclick="setTerm\(36,this\)">36 mo/);
+  assert.match(html, /onclick="setTerm\(48,this\)">48 mo/);
   assert.match(html, /class="toggle-btn active" aria-pressed="true" onclick="setTerm\(60,this\)">60 mo/);
+  assert.match(html, /Terms from 12 months/);
   assert.match(html, /id="sub-lower-note"[^>]*> Subscription is lower because the furniture comes back at lease end\./);
   assert.equal(html.includes('Most Popular'), false);
   const usedStart = html.indexOf('<!-- Used furniture -->');
@@ -176,14 +180,11 @@ test('12-month term, price floors, and the subscription comparison note', () => 
   const { elements, sandbox } = loadCalculator(html);
   const button = element();
   const cases = {
-    '1000:12': ['$20,000', '$1,758.33', 'Total: $21,100', '$1,743.33', 'Total: $20,920', '$12,000', ''],
     '1000:60': ['$20,000', '$349.00', 'Total: $20,940', '$379.00', 'Total: $22,740', '$12,000', 'none'],
-    '3000:12': ['$60,000', '$5,275.00', 'Total: $63,300', '$5,230.00', 'Total: $62,760', '$36,000', ''],
     '3000:24': ['$60,000', '$3,250.00', 'Total: $78,000', '$3,625.00', 'Total: $87,000', '$36,000', 'none'],
     '3000:36': ['$60,000', '$2,000.00', 'Total: $72,000', '$2,200.00', 'Total: $79,200', '$36,000', 'none'],
     '3000:48': ['$60,000', '$1,400.00', 'Total: $67,200', '$1,525.00', 'Total: $73,200', '$36,000', 'none'],
     '3000:60': ['$60,000', '$1,047.00', 'Total: $62,820', '$1,137.00', 'Total: $68,220', '$36,000', 'none'],
-    '10000:12': ['$200,000', '$17,583.33', 'Total: $211,000', '$17,433.33', 'Total: $209,200', '$120,000', ''],
     '10000:60': ['$200,000', '$3,490.00', 'Total: $209,400', '$3,790.00', 'Total: $227,400', '$120,000', 'none'],
   };
 

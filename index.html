@@ -222,6 +222,11 @@
     }
     .toggle-btn:hover { border-color: #1B7A7A; color: #1B7A7A; }
     .toggle-btn.active { background-color: #1B7A7A; border-color: #1B7A7A; color: white; }
+    .term-field { container-type: inline-size; }
+    .term-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    @container (max-width: 360px) {
+      .term-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+    }
     .yn-btn {
       padding: 0.5rem 1.5rem;
       border: 2px solid #E8ECF0;
@@ -540,11 +545,10 @@
             </div>
           </div>
           <!-- Term -->
-          <div>
+          <div class="term-field">
             <p id="term-label" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">What is your office lease term?</p>
             <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Longer terms = lower monthly payments</p>
-            <div role="group" aria-labelledby="term-label" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-              <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(12,this)">12 mo</button>
+            <div role="group" aria-labelledby="term-label" class="term-buttons">
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(24,this)">24 mo</button>
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(36,this)">36 mo</button>
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(48,this)">48 mo</button>
@@ -1082,12 +1086,9 @@
 // monthly = (buy total * per-term factor) / months, then the monthly floor.
 // Rent-to-own factors: 24: 1.30, 36: 1.20, 48: 1.12, 60: 1.047.
 // Subscription factors: 24: 1.45, 36: 1.32, 48: 1.22, 60: 1.137.
-// The 12 month button has no factor in that table, so it keeps the previous flat premiums.
 const BUY_RATE        = 20;    // $/sqft one-time purchase price, the base total
 const RTO_TOTAL_MARKUP = { 24: 1.30, 36: 1.20, 48: 1.12, 60: 1.047 };
 const SUB_TOTAL_MARKUP = { 24: 1.45, 36: 1.32, 48: 1.22, 60: 1.137 };
-const RTO_FLAT_MULTIPLIER = 1.055; // 12 month button only. No 12 month factor was provided.
-const SUB_FLAT_MULTIPLIER = 1.046; // 12 month button only. No 12 month factor was provided.
 const USED_RATE       = 12;    // typical $/sqft used furniture price, not a maximum. Delivery and installation quoted separately.
 
 // Displayed monthly floors (approved 2026-10-20): rent-to-own from $349/mo, subscription from $379/mo
@@ -1165,8 +1166,8 @@ function calcUpdate() {
   // Buy outright is the base total. Same structure as easyspaces.online calculator.js:
   // monthly = (base total * per-term factor) / months, with a monthly floor.
   const buyTotal    = sqft * BUY_RATE;
-  const rtoMarkup   = Object.prototype.hasOwnProperty.call(RTO_TOTAL_MARKUP, term) ? RTO_TOTAL_MARKUP[term] : RTO_FLAT_MULTIPLIER;
-  const subMarkup   = Object.prototype.hasOwnProperty.call(SUB_TOTAL_MARKUP, term) ? SUB_TOTAL_MARKUP[term] : SUB_FLAT_MULTIPLIER;
+  const rtoMarkup   = RTO_TOTAL_MARKUP[term];
+  const subMarkup   = SUB_TOTAL_MARKUP[term];
   const rtoMonthly  = Math.max((buyTotal * rtoMarkup) / term, RTO_MIN_MONTHLY);
   const rtoTotal    = rtoMonthly * term;
   const subMonthly  = Math.max((buyTotal * subMarkup) / term, SUB_MIN_MONTHLY);
