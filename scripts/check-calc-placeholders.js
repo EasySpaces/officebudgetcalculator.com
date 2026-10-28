@@ -184,6 +184,8 @@ test('12-month term, price floors, and the subscription comparison note', () => 
   assert.match(usedCard, /Typical one-time total/);
   assert.match(usedCard, /Delivery and installation quoted separately/);
   assert.match(usedCard, /Limited inventory\. Availability varies\./);
+  assert.match(usedCard, /href="https:\/\/calendly\.com\/interioravenue\/website-inquiry"/);
+  assert.match(usedCard, /Schedule a Quick Call/);
   assert.equal(usedCard.includes('Installation not included'), false);
   assert.equal(/max|guaranteed|warranty|quality|condition/i.test(usedCard), false);
   assert.equal(html.includes('Most Popular'), false);
