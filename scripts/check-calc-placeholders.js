@@ -20,6 +20,7 @@ const RESULT_IDS = [
   'rto-total',
   'sub-monthly',
   'sub-total',
+  'used-total',
   'space-city',
   'space-monthly',
   'total-monthly',
@@ -67,10 +68,7 @@ function element() {
   };
 }
 
-test('static calculator placeholders match calcUpdate() for the default inputs', () => {
-  const html = fs.readFileSync(HTML_PATH, 'utf8');
-  const staticText = Object.fromEntries(RESULT_IDS.map((id) => [id, extractStaticText(html, id)]));
-
+function loadCalculator(html) {
   const elements = {};
   for (const id of RESULT_IDS) {
     elements[id] = element();
@@ -121,6 +119,13 @@ test('static calculator placeholders match calcUpdate() for the default inputs',
 
   vm.createContext(sandbox);
   vm.runInContext(extractCalculatorScript(html), sandbox, { filename: 'index.html' });
+  return { elements, sandbox };
+}
+
+test('static calculator placeholders match calcUpdate() for the default inputs', () => {
+  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const staticText = Object.fromEntries(RESULT_IDS.map((id) => [id, extractStaticText(html, id)]));
+  const { elements } = loadCalculator(html);
 
   assert.equal(elements['active-results'].style.display, 'block', 'default city should show active results');
   assert.equal(elements['space-row'].style.display, 'block', 'default "needs space" should show the space row');
@@ -132,4 +137,31 @@ test('static calculator placeholders match calcUpdate() for the default inputs',
       `#${id} static placeholder ${JSON.stringify(staticText[id])} does not match calcUpdate() output ${JSON.stringify(elements[id].textContent)}`
     );
   }
+});
+
+test('used furniture is sqft x $12 and does not change the other options', () => {
+  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const { elements, sandbox } = loadCalculator(html);
+  const button = element();
+
+  // Existing Buy Outright ($20/sqft), rent-to-own (x 1.055), and subscription (x 1.046)
+  // at the 24-month default, checked at several square footages.
+  const cases = [1000, 1500, 2500, 3000, 5000, 10000, 20000];
+  for (const sqft of cases) {
+    sandbox.syncSqft(sqft);
+    const buy = sqft * 20;
+    const rto = buy * 1.055;
+    const sub = buy * 1.046;
+    assert.equal(elements['buy-total'].textContent, '$' + buy.toLocaleString('en-US'));
+    assert.equal(elements['rto-total'].textContent, 'Total: $' + Math.round(rto).toLocaleString('en-US'));
+    assert.equal(elements['sub-total'].textContent, 'Total: $' + Math.round(sub).toLocaleString('en-US'));
+    assert.equal(elements['used-total'].textContent, '$' + (sqft * 12).toLocaleString('en-US'));
+    assert.equal(elements['sqft-input'].value, sqft);
+  }
+
+  sandbox.setTerm(60, button);
+  assert.equal(elements['used-total'].textContent, '$240,000', 'used furniture ignores the lease term');
+  assert.equal(elements['buy-total'].textContent, '$400,000', 'buy outright ignores the lease term');
+  sandbox.syncSqft(3000);
+  assert.equal(elements['used-total'].textContent, '$36,000');
 });
