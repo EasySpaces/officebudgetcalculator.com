@@ -44,7 +44,7 @@
         "@id": "https://officebudgetcalculator.com/#website",
         "url": "https://officebudgetcalculator.com/",
         "name": "Office Budget Calculator",
-        "description": "Free office furniture cost calculator for Phoenix and Las Vegas. Compare buying, rent-to-own, and an Easy Spaces subscription.",
+        "description": "Free office furniture cost calculator for Phoenix and Las Vegas. Compare buying, rent-to-own, an Easy Spaces subscription, and used furniture.",
         "inLanguage": "en-US",
         "publisher": { "@id": "https://officebudgetcalculator.com/#organization" }
       },
@@ -53,7 +53,7 @@
         "@id": "https://officebudgetcalculator.com/#calculator",
         "name": "Office Budget Calculator",
         "url": "https://officebudgetcalculator.com/",
-        "description": "Free interactive calculator comparing office furniture buying, rent-to-own, and Easy Spaces subscription costs for Phoenix and Las Vegas businesses.",
+        "description": "Free interactive calculator comparing office furniture buying, rent-to-own, Easy Spaces subscription, and used furniture costs for Phoenix and Las Vegas businesses.",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
         "browserRequirements": "Requires JavaScript",
@@ -235,6 +235,15 @@
     }
     .yn-btn.active { background-color: #1B7A7A; border-color: #1B7A7A; color: white; }
     .featured-col { border: 3px solid #E8621A !important; position: relative; }
+    .calc-cols {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 1100px) {
+      .calc-cols { grid-template-columns: 1fr 1fr; }
+    }
     .featured-badge {
       position: absolute;
       top: -14px;
@@ -367,7 +376,7 @@
         Office Furniture Phoenix &amp; Las Vegas: See Your Office Furniture Budget Before You Commit
       </h1>
       <p style="color:rgba(255,255,255,0.85);font-size:1.15rem;line-height:1.65;margin-bottom:2rem;max-width:580px;">
-        Plan on a $20 per sq ft max budget for office furniture, and most projects come in under that. This free calculator shows you the real numbers: buy outright vs. rent-to-own vs. Easy Spaces subscription, side by side, instantly.
+        Plan on a $20 per sq ft max budget for office furniture, and most projects come in under that. This free calculator shows you the real numbers: buy outright vs. rent-to-own vs. Easy Spaces subscription vs. used furniture, side by side, instantly.
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:2rem;">
         <button onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})" class="es-btn-primary" style="font-size:1.05rem;padding:1rem 2rem;">
@@ -504,12 +513,12 @@
         See Exactly What Your Office Furniture Phoenix &amp; Las Vegas Will Cost
       </h2>
       <p style="color:rgba(255,255,255,0.7);max-width:36rem;margin:0 auto;line-height:1.7;">
-        Enter your square footage and lease term. See your three options side by side, updated instantly.
+        Enter your square footage and lease term. See your four options side by side, updated instantly.
       </p>
     </div>
 
     <!-- Calculator Card -->
-    <div style="background:white;border-radius:1rem;box-shadow:0 25px 50px rgba(0,0,0,0.4);overflow:hidden;max-width:960px;margin:0 auto;" class="reveal">
+    <div style="background:white;border-radius:1rem;box-shadow:0 25px 50px rgba(0,0,0,0.4);overflow:hidden;max-width:1180px;margin:0 auto;" class="reveal">
       <!-- Inputs -->
       <div style="padding:2rem;border-bottom:1px solid #E8ECF0;">
         <div class="grid-2" style="gap:1.5rem;">
@@ -575,7 +584,7 @@
 
         <!-- Active market results -->
         <div id="active-results">
-          <div class="calc-cols" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem;">
+          <div class="calc-cols">
             <!-- Buy Outright -->
             <div style="border:1.5px solid #E8ECF0;border-radius:0.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:0.75rem;">
               <div style="text-align:center;">
@@ -600,7 +609,7 @@
               </div>
               <div style="text-align:center;padding:0.75rem;background:#F4F6F8;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#4B5563;margin-bottom:0.25rem;">Monthly Payment</p>
-                <p id="rto-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$2,637.50</p>
+                <p id="rto-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$1,055.00</p>
                 <p id="rto-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $63,300</p>
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
@@ -618,7 +627,7 @@
               </div>
               <div style="text-align:center;padding:0.75rem;background:#E8F5F5;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#1B7A7A;margin-bottom:0.25rem;">Monthly Payment</p>
-                <p id="sub-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#1B7A7A;">$2,615.00</p>
+                <p id="sub-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#1B7A7A;">$1,046.00</p>
                 <p id="sub-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $62,760</p>
               </div>
               <div style="font-size:0.8rem;color:#374151;display:flex;flex-direction:column;gap:0.5rem;">
@@ -629,10 +638,29 @@
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600;color:#12192C;">Terms from 12 months</span></div>
               </div>
             </div>
+            <!-- Used furniture -->
+            <div style="border:1.5px solid #E8ECF0;border-radius:0.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:0.75rem;">
+              <div style="text-align:center;">
+                <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Used furniture</p>
+                <p style="font-size:0.7rem;color:#4B5563;">Typical price: $12 per sq ft</p>
+              </div>
+              <div style="text-align:center;padding:0.75rem;background:#F4F6F8;border-radius:0.5rem;">
+                <p style="font-size:0.7rem;color:#4B5563;margin-bottom:0.25rem;">Typical one-time total</p>
+                <p id="used-total" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$36,000</p>
+              </div>
+              <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
+                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Delivery and installation quoted separately</span></div>
+                <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Limited inventory. Availability varies.</span></div>
+              </div>
+              <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta" data-cta="used-furniture" style="justify-content:center;width:100%;margin-top:auto;box-sizing:border-box;padding:0.875rem 0.75rem;text-align:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Schedule a Quick Call
+              </a>
+            </div>
           </div>
 
           <p style="font-size:0.75rem;text-align:center;color:#4B5563;margin-bottom:0.5rem;">Rent-to-own delivery &amp; install are quoted separately.<span id="sub-lower-note"> Subscription is lower because the furniture comes back at lease end.</span></p>
-          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Furniture planning estimates use a $20/sq ft purchase baseline and simplified term factors. They are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
+          <p style="font-size:0.75rem;text-align:center;color:#4B5563;">* Furniture planning estimates use a $20/sq ft purchase baseline and simplified term factors. Used furniture uses a typical price of $12 per square foot, and delivery and installation are quoted separately. They are not quotes or financing offers. Final pricing depends on layout, product selection, delivery, installation, building conditions, market and financing approval.</p>
         </div>
       </div>
     </div>
@@ -737,7 +765,7 @@
           </div>
           <div>
             <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Transparent Methodology</p>
-            <p style="font-size:0.875rem;color:#6B7280;line-height:1.7;">We show you all three options, buy, rent-to-own and subscription, so you can choose what fits your business.</p>
+            <p style="font-size:0.875rem;color:#6B7280;line-height:1.7;">We show you all four options, buy, rent-to-own, subscription and used furniture, so you can choose what fits your business.</p>
           </div>
         </div>
       </div>
@@ -1064,6 +1092,7 @@
 const BUY_RATE        = 20;    // $/sqft one-time purchase price
 const RTO_MULTIPLIER  = 1.055; // RTO total cost = 105.5% of the purchase price
 const SUB_MULTIPLIER  = 1.046; // Subscription total cost = 104.6% of the purchase price
+const USED_RATE       = 12;    // typical $/sqft used furniture price, not a maximum. Delivery and installation quoted separately.
 
 // Displayed monthly floors (approved 2026-10-20): rent-to-own from $349/mo, subscription from $379/mo
 const RTO_MIN_MONTHLY = 349;
@@ -1145,6 +1174,7 @@ function calcUpdate() {
   // Subscription: fixed total premium over the purchase price, spread evenly across the term
   const subMonthly  = Math.max((buyTotal * SUB_MULTIPLIER) / term, SUB_MIN_MONTHLY);
   const subTotal    = subMonthly * term;
+  const usedTotal   = sqft * USED_RATE;
   const subNote = document.getElementById('sub-lower-note');
   if (subNote) subNote.style.display = (subMonthly < rtoMonthly) ? '' : 'none';
 
@@ -1153,6 +1183,7 @@ function calcUpdate() {
   document.getElementById('rto-total').textContent   = 'Total: ' + fmtK(rtoTotal);
   document.getElementById('sub-monthly').textContent = fmt(subMonthly);
   document.getElementById('sub-total').textContent   = 'Total: ' + fmtK(subTotal);
+  document.getElementById('used-total').textContent  = fmtK(usedTotal);
 }
 
 // ── Calendly links: UTM passthrough + GA4 click tracking ──────
