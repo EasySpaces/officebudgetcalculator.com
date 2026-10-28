@@ -169,8 +169,8 @@ test('12-month term, price floors, and the subscription comparison note', () => 
   assert.match(card, /Typical one-time total/);
   assert.match(card, /Delivery and installation quoted separately/);
   assert.match(card, /Limited inventory\. Availability varies\./);
-  assert.match(card, /href="https:\/\/calendly\.com\/interioravenue\/website-inquiry"/);
-  assert.match(card, /Schedule a Quick Call/);
+  assert.equal(/<a\b|<button\b/i.test(card), false);
+  assert.equal(/calendly\.com|Schedule a Quick Call/.test(card), false);
   assert.equal(/warranty|quality guarantee/i.test(card), false);
 
   const { elements, sandbox } = loadCalculator(html);
