@@ -29,11 +29,7 @@
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="/assets/favicon-192.png" sizes="192x192" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="/assets/office-setup-hero.webp" type="image/webp" fetchpriority="high" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/assets/office-setup-hero.webp" imagesrcset="/assets/office-setup-hero-800.webp 800w, /assets/office-setup-hero-1200.webp 1200w, /assets/office-setup-hero.webp 1737w" imagesizes="100vw" type="image/webp" fetchpriority="high" />
   <!-- JSON-LD Structured Data. FAQ markup was removed because those questions are not on the page. -->
   <script type="application/ld+json">
   {
@@ -81,10 +77,27 @@
   }
   </script>
   <style>
+/* Self hosted Barlow and Inter. Fallback faces use size-adjust and ascent-override so text does not move when the web font swaps. */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url("/assets/fonts/inter-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url("/assets/fonts/inter-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url("/assets/fonts/inter-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url("/assets/fonts/barlow-latin-600.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:700;font-display:swap;src:url("/assets/fonts/barlow-latin-700.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:800;font-display:swap;src:url("/assets/fonts/barlow-latin-800.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:900;font-display:swap;src:url("/assets/fonts/barlow-latin-900.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Barlow';font-style:italic;font-weight:700;font-display:swap;src:url("/assets/fonts/barlow-latin-700italic.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Inter Fallback';font-style:normal;font-weight:400;src:local("Arial"), local("Liberation Sans"), local("Arimo");size-adjust:107.54%;ascent-override:90.08%;descent-override:22.43%;line-gap-override:0%;}
+@font-face{font-family:'Inter Fallback';font-style:normal;font-weight:600;src:local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold");size-adjust:102.73%;ascent-override:94.30%;descent-override:23.48%;line-gap-override:0%;}
+@font-face{font-family:'Inter Fallback';font-style:normal;font-weight:700;src:local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold");size-adjust:104.40%;ascent-override:92.79%;descent-override:23.10%;line-gap-override:0%;}
+@font-face{font-family:'Barlow Fallback';font-style:normal;font-weight:600;src:local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold");size-adjust:92.51%;ascent-override:108.10%;descent-override:21.62%;line-gap-override:0%;}
+@font-face{font-family:'Barlow Fallback';font-style:normal;font-weight:700;src:local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold");size-adjust:93.94%;ascent-override:106.45%;descent-override:21.29%;line-gap-override:0%;}
+@font-face{font-family:'Barlow Fallback';font-style:normal;font-weight:800;src:local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold");size-adjust:95.43%;ascent-override:104.79%;descent-override:20.96%;line-gap-override:0%;}
+@font-face{font-family:'Barlow Fallback';font-style:normal;font-weight:900;src:local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold");size-adjust:93.03%;ascent-override:107.49%;descent-override:21.50%;line-gap-override:0%;}
+@font-face{font-family:'Barlow Fallback';font-style:italic;font-weight:700;src:local("Arial Bold Italic"), local("Liberation Sans Bold Italic"), local("Arimo Bold Italic");size-adjust:91.36%;ascent-override:109.45%;descent-override:21.89%;line-gap-override:0%;}
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', 'Inter Fallback', sans-serif;
       color: #12192C;
       background: #fff;
       line-height: 1.6;
@@ -106,7 +119,7 @@
 
     /* ── Typography ── */
     .es-section-label {
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 700;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
@@ -115,13 +128,13 @@
       display: block;
     }
     .es-headline {
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 900;
       line-height: 1.05;
       letter-spacing: -0.02em;
     }
     .es-subheadline {
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 600;
       line-height: 1.2;
     }
@@ -130,7 +143,7 @@
     .es-btn-primary {
       background-color: #D14900;
       color: white;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 700;
       letter-spacing: 0.02em;
       padding: 0.875rem 2rem;
@@ -148,7 +161,7 @@
     .es-btn-secondary {
       background-color: transparent;
       color: white;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 700;
       letter-spacing: 0.02em;
       padding: 0.875rem 2rem;
@@ -166,7 +179,7 @@
     .es-btn-teal {
       background-color: #1B7A7A;
       color: white;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 700;
       letter-spacing: 0.02em;
       padding: 0.875rem 2rem;
@@ -184,7 +197,7 @@
     .es-btn-dark {
       background-color: #12192C;
       color: white;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 700;
       letter-spacing: 0.02em;
       padding: 0.875rem 2rem;
@@ -213,7 +226,7 @@
       border: 2px solid #E8ECF0;
       background: white;
       color: #374151;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 600;
       font-size: 0.9rem;
       border-radius: 0.375rem;
@@ -232,7 +245,7 @@
       border: 2px solid #E8ECF0;
       background: white;
       color: #374151;
-      font-family: 'Barlow', sans-serif;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
       font-weight: 600;
       border-radius: 0.375rem;
       transition: all 150ms ease-out;
@@ -299,7 +312,7 @@
     .star { color: #F59E0B; }
     input[type="range"] { accent-color: #1B7A7A; }
     select, input[type="number"], input[type="text"], input[type="email"], textarea {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', 'Inter Fallback', sans-serif;
     }
     .tabular-nums { font-variant-numeric: tabular-nums; }
     .space-form-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -350,7 +363,7 @@
       <a href="/" aria-label="Easy Spaces home" style="display:flex;align-items:center;gap:0.75rem;">
         <img src="/assets/logo.svg" alt="" width="190" height="40" style="height:40px;width:190px;" />
       </a>
-      <a href="tel:4803821171" style="display:flex;align-items:center;gap:0.5rem;color:white;font-family:'Barlow',sans-serif;font-weight:700;font-size:1rem;">
+      <a href="tel:4803821171" style="display:flex;align-items:center;gap:0.5rem;color:white;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:1rem;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
         (480) 382-1171
       </a>
@@ -363,7 +376,7 @@
 ════════════════════════════════════════════════════════════════ -->
 <section style="position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:#12192C;">
   <picture style="position:absolute;inset:0;opacity:0.35;">
-    <source srcset="assets/office-setup-hero.webp" type="image/webp" />
+    <source srcset="/assets/office-setup-hero-800.webp 800w, /assets/office-setup-hero-1200.webp 1200w, /assets/office-setup-hero.webp 1737w" sizes="100vw" type="image/webp" />
     <img class="hero-photo" src="assets/office-setup-hero.jpg" alt="" width="1737" height="906" fetchpriority="high" />
   </picture>
   <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(18,25,44,0.92) 45%,rgba(27,122,122,0.3) 100%);"></div>
@@ -388,23 +401,23 @@
       </div>
       <!-- Trust pills -->
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
-        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow',sans-serif;font-weight:600;font-size:0.85rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:600;font-size:0.85rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8621A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
           26,923+ Chairs Installed
         </div>
-        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow',sans-serif;font-weight:600;font-size:0.85rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:600;font-size:0.85rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8621A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           1,833+ Desks Installed
         </div>
-        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow',sans-serif;font-weight:600;font-size:0.85rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:600;font-size:0.85rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8621A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           Subscription: delivery built in
         </div>
-        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow',sans-serif;font-weight:600;font-size:0.85rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:600;font-size:0.85rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8621A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           Subscription: removal at lease end, no charge
         </div>
-        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow',sans-serif;font-weight:600;font-size:0.85rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);color:white;border:1px solid rgba(255,255,255,0.2);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:600;font-size:0.85rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8621A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           Work With Tenant Reps
         </div>
@@ -424,23 +437,23 @@
   <div class="container">
     <div class="grid-5" style="border-bottom:none;">
       <div style="padding:1.25rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.15);">
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">$349</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">$349</p>
         <p style="font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.25rem;">Rent-to-own from /month</p>
       </div>
       <div style="padding:1.25rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.15);">
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">7-28</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">7-28</p>
         <p style="font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.25rem;">Days to move-in ready once your space is set</p>
       </div>
       <div style="padding:1.25rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.15);">
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">26,923+</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">26,923+</p>
         <p style="font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.25rem;">Chairs installed</p>
       </div>
       <div style="padding:1.25rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.15);">
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">1,833+</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">1,833+</p>
         <p style="font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.25rem;">Desks installed</p>
       </div>
       <div style="padding:1.25rem 1rem;text-align:center;">
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">$0</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.875rem;color:white;line-height:1.1;">$0</p>
         <p style="font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.25rem;">Upfront furniture cost</p>
       </div>
     </div>
@@ -485,13 +498,13 @@
         <p style="color:#374151;line-height:1.75;margin-bottom:2rem;">
           We can connect you with a licensed broker in Arizona or Nevada for tenant representation. Then we furnish your space with rent-to-own or a subscription, both with $0 upfront.
         </p>
-        <p style="font-size:1.125rem;font-weight:700;color:#1B7A7A;font-family:'Barlow',sans-serif;">
+        <p style="font-size:1.125rem;font-weight:700;color:#1B7A7A;font-family:'Barlow', 'Barlow Fallback', sans-serif;">
           One company. One call. Fully move-in ready.
         </p>
       </div>
       <div class="reveal" style="position:relative;border-radius:1rem;overflow:hidden;aspect-ratio:1179/682;box-shadow:0 4px 24px rgba(0,0,0,0.1);">
         <picture>
-          <source srcset="assets/office-setup.webp" type="image/webp" />
+          <source srcset="/assets/office-setup-800.webp 800w, /assets/office-setup-1200.webp 1200w, /assets/office-setup.webp 1179w" sizes="(max-width: 768px) calc(100vw - 2rem), 584px" type="image/webp" />
           <img src="assets/office-setup.jpg" alt="Three-panel graphic: work with tenant reps, typically at no cost to you, and their fee is typically paid by the landlord. Furniture subscription with zero upfront cost. One Partner: One call covers space, furniture, and install. Furnished and move-in ready in 2 to 4 weeks once your space is set." style="width:100%;height:100%;object-fit:contain;background:white;" loading="lazy" width="1179" height="682" />
         </picture>
       </div>
@@ -503,7 +516,7 @@
      CALCULATOR
 ════════════════════════════════════════════════════════════════ -->
 <section id="calculator" style="padding:5rem 0;background:#12192C;position:relative;overflow:hidden;">
-  <div style="position:absolute;font-size:clamp(200px,30vw,400px);font-family:'Barlow',sans-serif;font-weight:900;color:rgba(255,255,255,0.03);line-height:1;top:0;right:-2rem;pointer-events:none;user-select:none;overflow:hidden;">$$$</div>
+  <div style="position:absolute;font-size:clamp(200px,30vw,400px);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;color:rgba(255,255,255,0.03);line-height:1;top:0;right:-2rem;pointer-events:none;user-select:none;overflow:hidden;">$$$</div>
   <div class="container" style="position:relative;z-index:10;">
     <div style="text-align:center;margin-bottom:2.5rem;" class="reveal">
       <span class="es-section-label" style="margin-bottom:0.75rem;">Free Interactive Calculator</span>
@@ -522,20 +535,20 @@
         <div class="grid-2" style="gap:1.5rem;">
           <!-- Sqft -->
           <div>
-            <label id="sqft-label" for="sqft-input" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">How many square feet is your office space?</label>
+            <label id="sqft-label" for="sqft-input" style="display:block;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">How many square feet is your office space?</label>
             <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Not sure? A good rule of thumb is 150 to 200 sq ft per employee.</p>
             <div style="display:flex;align-items:center;gap:0.75rem;">
               <input type="range" id="sqft-slider" min="1000" max="20000" step="100" value="3000" aria-labelledby="sqft-label" style="flex:1;accent-color:#1B7A7A;" oninput="syncSqft(this.value)" />
-              <input type="number" id="sqft-input" min="1000" max="20000" value="3000" style="width:6rem;border:2px solid #1B7A7A;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;font-weight:700;font-size:0.875rem;font-family:'Barlow',sans-serif;color:#12192C;" oninput="syncSqft(Math.min(20000,Math.max(1000,parseInt(this.value)||1000)))" />
+              <input type="number" id="sqft-input" min="1000" max="20000" value="3000" style="width:6rem;border:2px solid #1B7A7A;border-radius:0.5rem;padding:0.5rem 0.75rem;text-align:center;font-weight:700;font-size:0.875rem;font-family:'Barlow', 'Barlow Fallback', sans-serif;color:#12192C;" oninput="syncSqft(Math.min(20000,Math.max(1000,parseInt(this.value)||1000)))" />
             </div>
             <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:#4B5563;margin-top:0.25rem;"><span>1,000 sq ft</span><span>20,000 sq ft</span></div>
           </div>
           <!-- City -->
           <div>
-            <label id="city-label" for="city-select" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">What city is your office in?</label>
+            <label id="city-label" for="city-select" style="display:block;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">What city is your office in?</label>
             <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Active markets: Phoenix Metro &amp; Las Vegas Metro</p>
             <div style="position:relative;">
-              <select id="city-select" style="width:100%;border:1.5px solid #E8ECF0;border-radius:0.5rem;padding:0.625rem 2rem 0.625rem 0.75rem;appearance:none;font-size:0.875rem;font-weight:600;color:#12192C;font-family:'Barlow',sans-serif;" onchange="onCityChange()">
+              <select id="city-select" style="width:100%;border:1.5px solid #E8ECF0;border-radius:0.5rem;padding:0.625rem 2rem 0.625rem 0.75rem;appearance:none;font-size:0.875rem;font-weight:600;color:#12192C;font-family:'Barlow', 'Barlow Fallback', sans-serif;" onchange="onCityChange()">
                 <optgroup label="Active Markets">
                   <option value="Phoenix Metro">Phoenix Metro</option>
                   <option value="Las Vegas Metro">Las Vegas Metro</option>
@@ -546,7 +559,7 @@
           </div>
           <!-- Term -->
           <div class="term-field">
-            <p id="term-label" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">What is your office lease term?</p>
+            <p id="term-label" style="display:block;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">What is your office lease term?</p>
             <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">Longer terms = lower monthly payments</p>
             <div role="group" aria-labelledby="term-label" class="term-buttons">
               <button type="button" class="toggle-btn" aria-pressed="false" onclick="setTerm(24,this)">24 mo</button>
@@ -557,7 +570,7 @@
           </div>
           <!-- Has space -->
           <div>
-            <p id="space-label" style="display:block;font-family:'Barlow',sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">Do you already have an office space?</p>
+            <p id="space-label" style="display:block;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.875rem;color:#12192C;margin-bottom:0.25rem;">Do you already have an office space?</p>
             <p style="font-size:0.75rem;color:#4B5563;margin-bottom:0.75rem;">If not, we'll estimate your monthly space cost too.</p>
             <div class="yn-row" role="group" aria-labelledby="space-label">
               <button type="button" class="yn-btn" aria-pressed="false" onclick="setHasSpace(true,this)" id="btn-yes">Yes, I have a space</button>
@@ -571,7 +584,7 @@
       <div id="calc-results" style="padding:2rem;">
         <!-- Outside service area (hidden; no city options trigger it) -->
         <div id="coming-soon-msg" style="display:none;text-align:center;padding:3rem 1rem;">
-          <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1.5rem;color:#12192C;margin-bottom:0.75rem;">Serving Phoenix &amp; Las Vegas</h3>
+          <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.5rem;color:#12192C;margin-bottom:0.75rem;">Serving Phoenix &amp; Las Vegas</h3>
           <p style="color:#6B7280;margin-bottom:1.5rem;">Outside these markets? Book a quick call and we will tell you what we can do.</p>
           <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta" data-cta="waitlist" style="justify-content:center;max-width:400px;margin:0 auto;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -585,12 +598,12 @@
             <!-- Buy Outright -->
             <div style="border:1.5px solid #E8ECF0;border-radius:0.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:0.75rem;">
               <div style="text-align:center;">
-                <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Buy Outright</p>
+                <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Buy Outright</p>
                 <p style="font-size:0.7rem;color:#4B5563;">One-time purchase</p>
               </div>
               <div style="text-align:center;padding:0.75rem;background:#F4F6F8;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#4B5563;margin-bottom:0.25rem;">Total Budget Max</p>
-                <p id="buy-total" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$60,000</p>
+                <p id="buy-total" style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$60,000</p>
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Large capital outlay</span></div>
@@ -601,12 +614,12 @@
             <!-- Rent to Own -->
             <div style="border:1.5px solid #E8ECF0;border-radius:0.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:0.75rem;">
               <div style="text-align:center;">
-                <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Rent-to-Own</p>
+                <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Rent-to-Own</p>
                 <p style="font-size:0.7rem;color:#4B5563;">Spread the cost</p>
               </div>
               <div style="text-align:center;padding:0.75rem;background:#F4F6F8;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#4B5563;margin-bottom:0.25rem;">Monthly Payment</p>
-                <p id="rto-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$1,047.00</p>
+                <p id="rto-monthly" style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$1,047.00</p>
                 <p id="rto-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $62,820</p>
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
@@ -619,12 +632,12 @@
             <!-- Easy Spaces -->
             <div class="featured-col" style="border-radius:0.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:0.75rem;background:#FAFFFE;">
                             <div style="text-align:center;">
-                <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:0.9rem;color:#1B7A7A;margin-bottom:0.25rem;">Easy Spaces Subscription</p>
+                <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:0.9rem;color:#1B7A7A;margin-bottom:0.25rem;">Easy Spaces Subscription</p>
                 <p style="font-size:0.7rem;color:#4B5563;">Monthly, $0 upfront</p>
               </div>
               <div style="text-align:center;padding:0.75rem;background:#E8F5F5;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#1B7A7A;margin-bottom:0.25rem;">Monthly Payment</p>
-                <p id="sub-monthly" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#1B7A7A;">$1,137.00</p>
+                <p id="sub-monthly" style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.5rem;color:#1B7A7A;">$1,137.00</p>
                 <p id="sub-total" style="font-size:0.7rem;color:#4B5563;margin-top:0.2rem;">Total: $68,220</p>
               </div>
               <div style="font-size:0.8rem;color:#374151;display:flex;flex-direction:column;gap:0.5rem;">
@@ -638,12 +651,12 @@
             <!-- Used furniture -->
             <div style="border:1.5px solid #E8ECF0;border-radius:0.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:0.75rem;">
               <div style="text-align:center;">
-                <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Used furniture</p>
+                <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:0.9rem;color:#12192C;margin-bottom:0.25rem;">Used furniture</p>
                 <p style="font-size:0.7rem;color:#4B5563;">Typical price: $12 per sq ft</p>
               </div>
               <div style="text-align:center;padding:0.75rem;background:#F4F6F8;border-radius:0.5rem;">
                 <p style="font-size:0.7rem;color:#4B5563;margin-bottom:0.25rem;">Typical one-time total</p>
-                <p id="used-total" style="font-family:'Barlow',sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$36,000</p>
+                <p id="used-total" style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:1.5rem;color:#12192C;">$36,000</p>
               </div>
               <div style="font-size:0.8rem;color:#6B7280;display:flex;flex-direction:column;gap:0.5rem;">
                 <div style="display:flex;align-items:center;gap:0.5rem;"><svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Delivery and installation quoted separately</span></div>
@@ -694,20 +707,20 @@
     <div class="grid-2" style="gap:2rem;align-items:start;">
       <!-- Left: What you get -->
       <div style="background:#12192C;border-radius:1rem;padding:2rem;color:white;" class="reveal">
-        <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:1.5rem;color:white;">What You Get Back</h3>
+        <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:1.5rem;color:white;">What You Get Back</h3>
         <div style="display:flex;flex-direction:column;gap:1.5rem;">
         </div>
         <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:0.75rem;">
-          <div style="width:44px;height:44px;border-radius:50%;background:#D14900;display:flex;align-items:center;justify-content:center;font-family:'Barlow',sans-serif;font-weight:900;color:white;font-size:1.1rem;">JB</div>
+          <div style="width:44px;height:44px;border-radius:50%;background:#D14900;display:flex;align-items:center;justify-content:center;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;color:white;font-size:1.1rem;">JB</div>
           <div>
-            <p style="font-family:'Barlow',sans-serif;font-weight:700;font-size:0.9rem;color:white;">Jason Bowman</p>
+            <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.9rem;color:white;">Jason Bowman</p>
             <p style="font-size:0.8rem;color:rgba(255,255,255,0.55);">President, Easy Spaces</p>
           </div>
         </div>
       </div>
       <!-- Right: Form -->
       <div style="background:white;border-radius:1rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.07);" class="reveal">
-        <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1.2rem;color:#12192C;margin-bottom:1rem;">Tell Us What You Need</h3>
+        <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.2rem;color:#12192C;margin-bottom:1rem;">Tell Us What You Need</h3>
         <p style="color:#6B7280;line-height:1.7;margin-bottom:1.5rem;">Book a free call and bring your city, square footage range, and move-in timeline. We'll follow up with options and a furniture estimate.</p>
         <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta" data-cta="space-form" style="width:100%;justify-content:center;font-size:1.05rem;padding:1rem;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -739,7 +752,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <div>
-            <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Built from 1,833+ Desks Installed in Phoenix &amp; Las Vegas</p>
+            <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Built from 1,833+ Desks Installed in Phoenix &amp; Las Vegas</p>
             <p style="font-size:0.875rem;color:#6B7280;line-height:1.7;">Our pricing isn't sourced from national averages or manufacturer lists. It's calibrated against actual furniture subscriptions we've delivered across the Phoenix Metro and Las Vegas Metro markets, so the numbers you see reflect what businesses actually pay here.</p>
           </div>
         </div>
@@ -748,7 +761,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <div>
-            <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Led by Jason Bowman, President</p>
+            <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Led by Jason Bowman, President</p>
             <p style="font-size:0.875rem;color:#6B7280;line-height:1.7;">Jason Bowman and the Easy Spaces team have spent years helping businesses plan and furnish offices. We built this tool so you can see your numbers before you commit.</p>
           </div>
         </div>
@@ -757,14 +770,14 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div>
-            <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Transparent Methodology</p>
+            <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#12192C;margin-bottom:0.25rem;">Transparent Methodology</p>
             <p style="font-size:0.875rem;color:#6B7280;line-height:1.7;">We show you all four options, buy, rent-to-own, subscription and used furniture, so you can choose what fits your business.</p>
           </div>
         </div>
       </div>
       <!-- Benchmark box -->
       <div style="border-radius:1rem;padding:2rem;background:#12192C;border:2px solid #1B7A7A;" class="reveal">
-        <p style="font-family:'Barlow',sans-serif;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#E8621A;margin-bottom:1rem;">Office Furniture Phoenix &amp; Las Vegas Benchmark</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#E8621A;margin-bottom:1rem;">Office Furniture Phoenix &amp; Las Vegas Benchmark</p>
         <p style="color:white;line-height:1.75;font-size:0.95rem;margin-bottom:1.5rem;">
           Based on 1,833+ desks installed across the Phoenix Metro and Las Vegas Metro, we plan to a <strong style="color:#E8621A;">$20 per sq ft max budget</strong>, and most projects come in under that. A subscription starts from $379/mo with $0 upfront, delivery and install built into your monthly price, and removal at lease end at no charge.
         </p>
@@ -772,22 +785,22 @@
           <div class="bench-row">
             <span style="color:rgba(255,255,255,0.75);">Small office (1,000 to 2,500 sq ft)</span>
             <div style="display:flex;gap:1.5rem;text-align:right;">
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$20K to $50K</p></div>
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">Ask us</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:white;">$20K to $50K</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#1B7A7A;">Ask us</p></div>
             </div>
           </div>
           <div class="bench-row">
             <span style="color:rgba(255,255,255,0.75);">Mid-size office (2,500 to 7,500 sq ft)</span>
             <div style="display:flex;gap:1.5rem;text-align:right;">
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$50K to $150K</p></div>
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">$872 to $2,615/mo</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:white;">$50K to $150K</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#1B7A7A;">$872 to $2,615/mo</p></div>
             </div>
           </div>
           <div class="bench-row">
             <span style="color:rgba(255,255,255,0.75);">Large office (7,500 to 20,000 sq ft)</span>
             <div style="display:flex;gap:1.5rem;text-align:right;">
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:white;">$150K to $400K</p></div>
-              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow',sans-serif;font-weight:700;color:#1B7A7A;">$2,615 to $6,973/mo</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Buy</p><p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:white;">$150K to $400K</p></div>
+              <div><p style="font-size:0.7rem;color:#D1D5DB;">Subscribe</p><p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#1B7A7A;">$2,615 to $6,973/mo</p></div>
             </div>
           </div>
         </div>
@@ -810,32 +823,32 @@
         <div style="width:56px;height:56px;border-radius:50%;background:#1B7A7A;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:white;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:2rem;color:rgba(27,122,122,0.15);line-height:1;margin-bottom:0.5rem;">01</p>
-        <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">Book a Free Call or Showroom Visit</h3>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:2rem;color:rgba(27,122,122,0.15);line-height:1;margin-bottom:0.5rem;">01</p>
+        <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">Book a Free Call or Showroom Visit</h3>
         <p style="font-size:0.875rem;color:#6B7280;line-height:1.65;">Tell us about your team, your timeline, and what you're looking for. We listen first and talk second.</p>
       </div>
       <div class="reveal" style="background:white;border-radius:1rem;padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
         <div style="width:56px;height:56px;border-radius:50%;background:#1B7A7A;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:white;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:2rem;color:rgba(27,122,122,0.15);line-height:1;margin-bottom:0.5rem;">02</p>
-        <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">We Find Your Space</h3>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:2rem;color:rgba(27,122,122,0.15);line-height:1;margin-bottom:0.5rem;">02</p>
+        <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">We Find Your Space</h3>
         <p style="font-size:0.875rem;color:#6B7280;line-height:1.65;">We can connect you with a licensed broker in Arizona or Nevada for tenant representation.</p>
       </div>
       <div class="reveal" style="background:white;border-radius:1rem;padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
         <div style="width:56px;height:56px;border-radius:50%;background:#1B7A7A;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:white;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:2rem;color:rgba(27,122,122,0.15);line-height:1;margin-bottom:0.5rem;">03</p>
-        <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">We Furnish Everything</h3>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:2rem;color:rgba(27,122,122,0.15);line-height:1;margin-bottom:0.5rem;">03</p>
+        <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">We Furnish Everything</h3>
         <p style="font-size:0.875rem;color:#6B7280;line-height:1.65;">Pick rent-to-own, a subscription (from 12 months; longer terms lower the monthly price) or buy outright. We handle delivery and setup.</p>
       </div>
       <div class="reveal" style="background:white;border-radius:1rem;padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
         <div style="width:56px;height:56px;border-radius:50%;background:#D14900;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:white;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
-        <p style="font-family:'Barlow',sans-serif;font-weight:900;font-size:2rem;color:rgba(232,98,26,0.15);line-height:1;margin-bottom:0.5rem;">04</p>
-        <h3 style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">Move In and Get to Work</h3>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;font-size:2rem;color:rgba(232,98,26,0.15);line-height:1;margin-bottom:0.5rem;">04</p>
+        <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1rem;color:#12192C;margin-bottom:0.75rem;">Move In and Get to Work</h3>
         <p style="font-size:0.875rem;color:#6B7280;line-height:1.65;">Your team walks into a fully furnished office. Move-in ready in 7-28 days once your space is set.</p>
       </div>
     </div>
@@ -860,7 +873,7 @@
     <div class="grid-2" style="gap:2rem;">
       <!-- Old Way -->
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:1rem;padding:2rem;" class="reveal">
-        <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1.1rem;color:#EF4444;margin-bottom:1.5rem;">❌ The Old Way (Buying)</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.1rem;color:#EF4444;margin-bottom:1.5rem;">❌ The Old Way (Buying)</p>
         <div style="display:flex;flex-direction:column;gap:0.75rem;">
           <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Large upfront capital expense</div>
           <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.65);"><svg class="x-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>6 to 12 week wait for delivery</div>
@@ -870,7 +883,7 @@
       </div>
       <!-- New Way -->
       <div style="background:rgba(27,122,122,0.15);border:1px solid #1B7A7A;border-radius:1rem;padding:2rem;" class="reveal">
-        <p style="font-family:'Barlow',sans-serif;font-weight:800;font-size:1.1rem;color:#1B7A7A;margin-bottom:1.5rem;">✅ The Easy Spaces Way</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.1rem;color:#1B7A7A;margin-bottom:1.5rem;">✅ The Easy Spaces Way</p>
         <div style="display:flex;flex-direction:column;gap:0.75rem;">
           <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.85);"><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>$0 upfront with rent-to-own or a subscription</div>
           <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:rgba(255,255,255,0.85);"><svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Subscription: delivery and install built into your monthly price</div>
@@ -879,7 +892,7 @@
         </div>
       </div>
     </div>
-    <p style="text-align:center;margin-top:2rem;font-size:1.25rem;font-weight:700;font-family:'Barlow',sans-serif;color:#12192C;font-style:italic;background:white;border-radius:0.75rem;padding:1.25rem 2rem;display:inline-block;margin-left:auto;margin-right:auto;width:100%;box-sizing:border-box;">
+    <p style="text-align:center;margin-top:2rem;font-size:1.25rem;font-weight:700;font-family:'Barlow', 'Barlow Fallback', sans-serif;color:#12192C;font-style:italic;background:white;border-radius:0.75rem;padding:1.25rem 2rem;display:inline-block;margin-left:auto;margin-right:auto;width:100%;box-sizing:border-box;">
       Keep more cash in the business.<br>Let Easy Spaces handle the furniture.
     </p>
   </div>
@@ -899,7 +912,7 @@
         <div style="display:flex;gap:0.25rem;"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p style="color:#374151;line-height:1.75;font-style:italic;flex:1;">"Easy Spaces made our office move completely stress-free. We were up and running in under two weeks, and the furniture looks incredible. I can't believe we almost spent $70,000 buying everything outright."</p>
         <div style="border-top:1px solid #E8ECF0;padding-top:1rem;">
-          <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;">Ryan Johnson, CEO</p>
+          <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#12192C;">Ryan Johnson, CEO</p>
           <p style="font-size:0.875rem;color:#6B7280;">Scottsdale, AZ</p>
         </div>
       </div>
@@ -907,7 +920,7 @@
         <div style="display:flex;gap:0.25rem;"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p style="color:#374151;line-height:1.75;font-style:italic;flex:1;">"The calculator alone saved us from a huge mistake. We were about to buy furniture on credit. After seeing the subscription numbers side by side, the decision was obvious. Jason and his team delivered everything on time."</p>
         <div style="border-top:1px solid #E8ECF0;padding-top:1rem;">
-          <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;">Sean Porter, Operations Manager</p>
+          <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#12192C;">Sean Porter, Operations Manager</p>
           <p style="font-size:0.875rem;color:#6B7280;">Las Vegas, NV</p>
         </div>
       </div>
@@ -915,7 +928,7 @@
         <div style="display:flex;gap:0.25rem;"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
         <p style="color:#374151;line-height:1.75;font-style:italic;flex:1;">"As a landlord, I was skeptical. But Easy Spaces helped me lease a vacant suite in 18 days by offering a furnished option. The tenant loved it, I got full asking rate, and I didn't have to give any concessions."</p>
         <div style="border-top:1px solid #E8ECF0;padding-top:1rem;">
-          <p style="font-family:'Barlow',sans-serif;font-weight:700;color:#12192C;">Don Brewer, Founder</p>
+          <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;color:#12192C;">Don Brewer, Founder</p>
           <p style="font-size:0.875rem;color:#6B7280;">Phoenix, AZ</p>
         </div>
       </div>
@@ -1001,11 +1014,11 @@
       <div>
         <img src="/assets/logo.svg" alt="Easy Spaces" width="190" height="40" style="height:40px;width:190px;margin-bottom:1rem;" />
         <p style="color:rgba(255,255,255,0.55);font-size:0.875rem;line-height:1.7;margin-bottom:1rem;">Furnish Your Growth. Office furniture rent-to-own, subscriptions and space planning for Phoenix and Las Vegas businesses.</p>
-        <p style="font-family:'Barlow',sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;">Locations</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;">Locations</p>
         <p style="color:rgba(255,255,255,0.55);font-size:0.875rem;margin-top:0.25rem;">Gilbert, AZ · Phoenix, AZ · Las Vegas, NV</p>
       </div>
       <div>
-        <p style="font-family:'Barlow',sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Services</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Services</p>
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
           <a href="/services/office-furniture-subscription/" style="color:rgba(255,255,255,0.55);font-size:0.875rem;transition:color 150ms;">Office Furniture Subscription</a>
           <a href="/services/tenant-rep-partners/" style="color:rgba(255,255,255,0.55);font-size:0.875rem;transition:color 150ms;">Tenant Rep Partners</a>
@@ -1015,7 +1028,7 @@
         </div>
       </div>
       <div>
-        <p style="font-family:'Barlow',sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Contact</p>
+        <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Contact</p>
         <div style="display:flex;flex-direction:column;gap:0.75rem;">
           <a href="tel:4803821171" style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.55);font-size:0.875rem;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
@@ -1044,30 +1057,48 @@
   </div>
 </footer>
 
-<!-- Analytics load after the page so they do not compete with the hero. -->
+<!-- Analytics scripts load after window load plus 1.5s so they do not compete with the hero. gtag and fbq calls made before then are queued, including PageView. -->
 <!-- TODO: replace G-3MG1RK27XV with the real GA4 Measurement ID before launch -->
 <script>
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
-  window.addEventListener('load', function () {
+  window.gtag('js', new Date());
+  window.gtag('config', 'G-3MG1RK27XV');
+
+  (function (f) {
+    if (f.fbq) return;
+    var n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = true;
+    n.version = '2.0';
+    n.queue = [];
+  })(window);
+  window.fbq('init', '417770564270432');
+  window.fbq('track', 'PageView');
+
+  var deferredTrackersStarted = false;
+  function loadDeferredTrackers() {
     var ga = document.createElement('script');
     ga.async = true;
     ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-3MG1RK27XV';
     document.head.appendChild(ga);
-    window.gtag('js', new Date());
-    window.gtag('config', 'G-3MG1RK27XV');
 
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '417770564270432');
-    fbq('track', 'PageView');
-  });
+    var fb = document.createElement('script');
+    fb.async = true;
+    fb.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    var firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(fb, firstScript);
+  }
+  function scheduleDeferredTrackers() {
+    if (deferredTrackersStarted) return;
+    deferredTrackersStarted = true;
+    window.setTimeout(loadDeferredTrackers, 1500);
+  }
+  if (document.readyState === 'complete') scheduleDeferredTrackers();
+  else window.addEventListener('load', scheduleDeferredTrackers);
 </script>
 <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=417770564270432&ev=PageView&noscript=1" /></noscript>
 
