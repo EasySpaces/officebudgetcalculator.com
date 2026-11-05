@@ -303,7 +303,45 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.75rem 1rem;
+      flex-wrap: wrap;
       padding: 0.75rem 0;
+    }
+    .nav-logo { flex-shrink: 0; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 0.15rem 0.35rem;
+      margin-left: auto;
+    }
+    .nav-link,
+    .nav-phone {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: white;
+      font-family: 'Barlow', 'Barlow Fallback', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    .nav-link { padding: 0 0.6rem; }
+    .nav-link:hover { text-decoration: underline; text-underline-offset: 0.22em; }
+    .nav-phone { gap: 0.5rem; padding-left: 0.45rem; }
+    /* Keep hash targets below the sticky bar. The calculator section already
+       has 5rem of top padding, so its margin only covers nav height beyond that. */
+    #calculator { scroll-margin-top: 0.85rem; }
+    #services { scroll-margin-top: 6rem; }
+    @media (max-width: 640px) {
+      .nav-links { flex: 1 1 100%; justify-content: flex-start; }
+      #calculator { scroll-margin-top: 4.25rem; }
+      #services { scroll-margin-top: 9.5rem; }
+    }
+    @media (max-width: 360px) {
+      #calculator { scroll-margin-top: 7.25rem; }
+      #services { scroll-margin-top: 12.25rem; }
     }
 
     /* ── Misc ── */
@@ -360,13 +398,17 @@
 <nav id="es-nav">
   <div class="container">
     <div class="nav-inner">
-      <a href="/" aria-label="Easy Spaces home" style="display:flex;align-items:center;gap:0.75rem;">
+      <a href="/" class="nav-logo" aria-label="Easy Spaces home" style="display:flex;align-items:center;gap:0.75rem;">
         <picture><source srcset="/assets/easy-spaces-logo.webp" type="image/webp" /><img src="/assets/easy-spaces-logo.png" alt="Easy Spaces, Furnish Your Growth" width="150" height="56" style="height:56px;width:auto;display:block;" /></picture>
       </a>
-      <a href="tel:4803821171" style="display:flex;align-items:center;gap:0.5rem;color:white;font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:1rem;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-        (480) 382-1171
-      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="#calculator">Calculator</a>
+        <a class="nav-link" href="#services">Services</a>
+        <a href="tel:4803821171" class="nav-phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          (480) 382-1171
+        </a>
+      </div>
     </div>
   </div>
 </nav>
@@ -1044,7 +1086,7 @@
         <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;">Locations</p>
         <p style="color:rgba(255,255,255,0.55);font-size:0.875rem;margin-top:0.25rem;">Gilbert, AZ · Phoenix, AZ · Las Vegas, NV</p>
       </div>
-      <div>
+      <div id="services">
         <p style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:700;font-size:0.8rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Services</p>
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
           <a href="/services/office-furniture-subscription/" style="color:rgba(255,255,255,0.55);font-size:0.875rem;transition:color 150ms;">Office Furniture Subscription</a>
