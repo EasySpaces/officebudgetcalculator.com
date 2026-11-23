@@ -132,9 +132,51 @@
     <div class="cta-box">
       <h2 style="margin-top:0;">Get a Free Consultation</h2>
       <p>Every project starts with a free consultation and a 3D layout. Run your numbers in the <a href="/">Office Budget Calculator</a>, then book a call.</p>
-      <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta">Book a Free Call</a>
+      <a href="#book" class="es-btn-primary calendly-cta">Book a Free Call</a>
     </div>
 <section class="faq"><h2>Frequently Asked Questions</h2><h3>What does Easy Spaces do?</h3><p>Easy Spaces furnishes offices in Phoenix and Las Vegas with rent-to-own, subscription or purchase options, and offers space planning with a 3D layout, relocation help and furnished lease solutions for landlords.</p><h3>Is the consultation free?</h3><p>Yes. Every project starts with a free consultation, and every project gets a 3D layout.</p><h3>Can you help me find office space?</h3><p>We can connect you with a licensed broker in Arizona or Nevada for tenant representation.</p></section>
+    <section id="book" style="text-align:center;margin-top:3rem;">
+      <h2 class="es-subheadline" style="font-size:1.5rem;margin-bottom:0.5rem;">Book a Free Call</h2>
+      <p style="margin-bottom:1rem;max-width:32rem;margin-left:auto;margin-right:auto;line-height:1.7;">Pick a time below and we will go over the service that fits your project.</p>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/interioravenue/website-inquiry?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=officebudgetcalculator.com&utm_medium=embed&utm_campaign=website-inquiry&utm_content=services" style="min-width:320px;height:700px;"></div>
+      <p><a href="https://calendly.com/interioravenue/website-inquiry?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=officebudgetcalculator.com&utm_medium=embed&utm_campaign=website-inquiry&utm_content=services-fallback" target="_blank" rel="noopener noreferrer">See open times on the scheduling page (opens in a new tab)</a></p>
+    </section>
+    <!-- Apply visitor UTMs from the query string or sessionStorage.es_utm
+         before widget.js reads data-url. Visitor source/medium/campaign/term
+         win when present. Page identity stays in utm_content unless the
+         visitor already has one. -->
+    <script>
+    (function () {
+      var widget = document.querySelector('#book .calendly-inline-widget');
+      if (!widget) return;
+      var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+      var fromQuery = {};
+      var params = new URLSearchParams(window.location.search);
+      keys.forEach(function (k) { if (params.get(k)) fromQuery[k] = params.get(k); });
+      if (Object.keys(fromQuery).length) {
+        try { sessionStorage.setItem('es_utm', JSON.stringify(fromQuery)); } catch (e) {}
+      }
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem('es_utm') || '{}'); } catch (e) {}
+      var visitor = Object.keys(fromQuery).length ? fromQuery : stored;
+      try {
+        var url = new URL(widget.getAttribute('data-url'));
+        keys.forEach(function (k) {
+          if (visitor[k]) url.searchParams.set(k, visitor[k]);
+        });
+        widget.setAttribute('data-url', url.toString());
+        var fallback = document.querySelector('#book a[href*="calendly.com"]');
+        if (fallback) {
+          var furl = new URL(fallback.href);
+          keys.forEach(function (k) {
+            if (visitor[k]) furl.searchParams.set(k, visitor[k]);
+          });
+          fallback.href = furl.toString();
+        }
+      } catch (e) {}
+    })();
+    </script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   </div>
   <footer class="legal-footer">
     <p><a href="/">Office Budget Calculator</a> <a href="/office-furniture-cost-per-square-foot/">Cost per Sq Ft</a> <a href="/services/">Services</a> <a href="/store/">Store</a> <a href="/about/">About</a></p>
