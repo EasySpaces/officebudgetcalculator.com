@@ -220,6 +220,14 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* Booking copy sits on the navy calculator background. */
+    #calculator #book { color: #fff; }
+    #book { scroll-margin-top: 7rem; }
+    @media (max-width: 900px) {
+      #book { scroll-margin-top: 14rem; }
+    }
+    #book a[href*="calendly.com"] { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
+
     /* ── Calculator controls ── */
     .toggle-btn {
       padding: 0.5rem 1.25rem;
@@ -437,7 +445,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           Calculate My Office Budget. It's Free
         </button>
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-secondary" style="font-size:1rem;padding:1rem 2rem;">
+        <a href="#book" class="es-btn-secondary" style="font-size:1rem;padding:1rem 2rem;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Talk to Our Team
         </a>
@@ -558,7 +566,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      CALCULATOR
 ════════════════════════════════════════════════════════════════ -->
-<section id="calculator" style="padding:5rem 0;background:#12192C;position:relative;overflow:hidden;">
+<section id="calculator" style="padding:5rem 0;background:#12192C;position:relative;overflow:hidden;overflow:clip;">
   <div style="position:absolute;font-size:clamp(200px,30vw,400px);font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:900;color:rgba(255,255,255,0.03);line-height:1;top:0;right:-2rem;pointer-events:none;user-select:none;overflow:hidden;">$$$</div>
   <div class="container" style="position:relative;z-index:10;">
     <div style="text-align:center;margin-bottom:2.5rem;" class="reveal">
@@ -629,7 +637,7 @@
         <div id="coming-soon-msg" style="display:none;text-align:center;padding:3rem 1rem;">
           <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.5rem;color:#12192C;margin-bottom:0.75rem;">Serving Phoenix &amp; Las Vegas</h3>
           <p style="color:#6B7280;margin-bottom:1.5rem;">Outside these markets? Book a quick call and we will tell you what we can do.</p>
-          <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta" data-cta="waitlist" style="justify-content:center;max-width:400px;margin:0 auto;">
+          <a href="#book" class="es-btn-primary calendly-cta" data-cta="waitlist" style="justify-content:center;max-width:400px;margin:0 auto;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Schedule a Quick Call
           </a>
@@ -714,22 +722,60 @@
       </div>
     </div>
 
-    <!-- Post-calculator CTA -->
-    <div style="text-align:center;margin-top:3rem;" class="reveal">
-      <h3 class="es-subheadline" style="color:white;font-size:1.5rem;margin-bottom:0.5rem;">Get a Free Consultation from One of Our Specialists</h3>
-      <p style="color:rgba(255,255,255,0.7);margin-bottom:0.5rem;max-width:32rem;margin-left:auto;margin-right:auto;line-height:1.7;">Your numbers are ready. Now let's make them real. We work with tenant reps who will review your results, validate your budget, and help you plan your space. We can connect you with a licensed broker in Arizona or Nevada for tenant representation.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary">
+    <!-- Post-calculator booking -->
+    <section id="book" class="reveal" style="text-align:center;margin-top:3rem;">
+      <h2 class="es-subheadline" style="font-size:1.5rem;margin-bottom:0.5rem;">Talk through your numbers</h2>
+      <p style="margin-bottom:1rem;max-width:32rem;margin-left:auto;margin-right:auto;line-height:1.7;">Pick a time for a Zoom call or a showroom visit. We'll go over your square footage, term and options with you.</p>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/interioravenue/website-inquiry?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=officebudgetcalculator.com&utm_medium=embed&utm_campaign=website-inquiry&utm_content=home" style="min-width:320px;height:700px;"></div>
+      <p><a href="https://calendly.com/interioravenue/website-inquiry?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=officebudgetcalculator.com&utm_medium=embed&utm_campaign=website-inquiry&utm_content=home-fallback" target="_blank" rel="noopener noreferrer">See open times on the scheduling page (opens in a new tab)</a></p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1.5rem;">
+        <a href="#book" class="es-btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Schedule Your Free Zoom Consultation
         </a>
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-secondary">
+        <a href="#book" class="es-btn-secondary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           Visit Our Phoenix Or Gilbert Showroom
         </a>
       </div>
       <p style="color:rgba(255,255,255,0.5);font-size:0.875rem;margin-top:1rem;">Free consultation. No obligation. No pushy sales tactics.</p>
-    </div>
+    </section>
+    <!-- Apply visitor UTMs from the query string or sessionStorage.es_utm
+         before widget.js reads data-url. Visitor source/medium/campaign/term
+         win when present. Page identity stays in utm_content unless the
+         visitor already has one. -->
+    <script>
+    (function () {
+      var widget = document.querySelector('#book .calendly-inline-widget');
+      if (!widget) return;
+      var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+      var fromQuery = {};
+      var params = new URLSearchParams(window.location.search);
+      keys.forEach(function (k) { if (params.get(k)) fromQuery[k] = params.get(k); });
+      if (Object.keys(fromQuery).length) {
+        try { sessionStorage.setItem('es_utm', JSON.stringify(fromQuery)); } catch (e) {}
+      }
+      var stored = {};
+      try { stored = JSON.parse(sessionStorage.getItem('es_utm') || '{}'); } catch (e) {}
+      var visitor = Object.keys(fromQuery).length ? fromQuery : stored;
+      try {
+        var url = new URL(widget.getAttribute('data-url'));
+        keys.forEach(function (k) {
+          if (visitor[k]) url.searchParams.set(k, visitor[k]);
+        });
+        widget.setAttribute('data-url', url.toString());
+        var fallback = document.querySelector('#book a[href*="calendly.com"]');
+        if (fallback) {
+          var furl = new URL(fallback.href);
+          keys.forEach(function (k) {
+            if (visitor[k]) furl.searchParams.set(k, visitor[k]);
+          });
+          fallback.href = furl.toString();
+        }
+      } catch (e) {}
+    })();
+    </script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   </div>
 </section>
 
@@ -792,7 +838,7 @@
       <div style="background:white;border-radius:1rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.07);" class="reveal">
         <h3 style="font-family:'Barlow', 'Barlow Fallback', sans-serif;font-weight:800;font-size:1.2rem;color:#12192C;margin-bottom:1rem;">Tell Us What You Need</h3>
         <p style="color:#6B7280;line-height:1.7;margin-bottom:1.5rem;">Book a free call and bring your city, square footage range, and move-in timeline. We'll follow up with options and a furniture estimate.</p>
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta" data-cta="space-form" style="width:100%;justify-content:center;font-size:1.05rem;padding:1rem;">
+        <a href="#book" class="es-btn-primary calendly-cta" data-cta="space-form" style="width:100%;justify-content:center;font-size:1.05rem;padding:1rem;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Schedule My Office Space + Furniture Call
         </a>
@@ -923,7 +969,7 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:2.5rem;">
-      <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary">
+      <a href="#book" class="es-btn-primary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Schedule Your Free Zoom Consultation
       </a>
@@ -1061,11 +1107,11 @@
         Rent-to-own from $349/mo with $0 upfront (delivery &amp; install quoted separately). Subscription from $379/mo with $0 upfront, with delivery and install built into your monthly price. Move-in ready in 2 to 4 weeks once your space is set.
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary" style="font-size:1.05rem;padding:1rem 2rem;">
+        <a href="#book" class="es-btn-primary" style="font-size:1.05rem;padding:1rem 2rem;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Schedule Your Free Zoom Consultation
         </a>
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-secondary" style="font-size:1.05rem;padding:1rem 2rem;">
+        <a href="#book" class="es-btn-secondary" style="font-size:1.05rem;padding:1rem 2rem;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           Book Your Showroom Visit
         </a>
@@ -1286,6 +1332,8 @@ function calcUpdate() {
 // All lead capture on this page routes to Calendly (no custom backend yet).
 // We forward the visitor's own UTM params onto every Calendly link so
 // bookings keep their original lead source, and log a GA4 event on click.
+// In-page #book buttons scroll to the inline widget. They are not Calendly
+// URLs, so they keep their href and only get the click event.
 (function () {
   const params = new URLSearchParams(window.location.search);
   const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
@@ -1301,8 +1349,8 @@ function calcUpdate() {
   try { storedUtm = JSON.parse(sessionStorage.getItem('es_utm') || '{}'); } catch (e) {}
   const finalUtm = Object.keys(utmParams).length ? utmParams : storedUtm;
 
-  document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
-    if (Object.keys(finalUtm).length) {
+  document.querySelectorAll('a[href*="calendly.com"], a[href="#book"]').forEach(link => {
+    if (Object.keys(finalUtm).length && (link.getAttribute('href') || '').indexOf('calendly.com') !== -1) {
       try {
         const url = new URL(link.href);
         Object.entries(finalUtm).forEach(([k, v]) => url.searchParams.set(k, v));

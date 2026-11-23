@@ -615,7 +615,7 @@
         <a href="/#calculator">Calculator</a>
         <a href="/services/">Services</a>
         <a href="/store/" aria-current="page">Store</a>
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta">Book a Free Call</a>
+        <a href="#book" class="es-btn-primary calendly-cta">Book a Free Call</a>
       </div>
     </div>
   </header>
@@ -628,7 +628,7 @@
       <p>Here's a look at the furniture we can put in your office. Pricing depends on your space, your layout, and how you want to pay, so we quote each project.</p>
       <p>We serve Phoenix and Las Vegas. Book a free call, or run the calculator first if you want a budget number.</p>
       <div class="store-hero-actions">
-        <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta">Book a Free Call</a>
+        <a href="#book" class="es-btn-primary calendly-cta">Book a Free Call</a>
         <a href="/#calculator" class="es-btn-secondary">Run the Calculator</a>
       </div>
     </div>
@@ -1282,10 +1282,52 @@
         <h2>Want a plan and a price?</h2>
         <p>This page shows what's available. On a call we'll talk through sizing, layout, and whether purchase, rent-to-own, or a subscription fits better.</p>
         <div class="cta-actions">
-          <a href="https://calendly.com/interioravenue/website-inquiry" target="_blank" rel="noopener noreferrer" class="es-btn-primary calendly-cta">Book a Free Call</a>
+          <a href="#book" class="es-btn-primary calendly-cta">Book a Free Call</a>
           <a href="/#calculator" class="es-btn-secondary-dark">Run the Calculator</a>
         </div>
       </div>
+      <section id="book" style="text-align:center;margin-top:3rem;">
+        <h2 class="es-subheadline" style="font-size:1.5rem;margin-bottom:0.5rem;">Book a Free Call</h2>
+        <p style="margin-bottom:1rem;max-width:32rem;margin-left:auto;margin-right:auto;line-height:1.7;">Pick a time below and we will help you plan the pieces for your space.</p>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/interioravenue/website-inquiry?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=officebudgetcalculator.com&utm_medium=embed&utm_campaign=website-inquiry&utm_content=store" style="min-width:320px;height:700px;"></div>
+        <p><a href="https://calendly.com/interioravenue/website-inquiry?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=officebudgetcalculator.com&utm_medium=embed&utm_campaign=website-inquiry&utm_content=store-fallback" target="_blank" rel="noopener noreferrer">See open times on the scheduling page (opens in a new tab)</a></p>
+      </section>
+      <!-- Apply visitor UTMs from the query string or sessionStorage.es_utm
+           before widget.js reads data-url. Visitor source/medium/campaign/term
+           win when present. Page identity stays in utm_content unless the
+           visitor already has one. -->
+      <script>
+      (function () {
+        var widget = document.querySelector('#book .calendly-inline-widget');
+        if (!widget) return;
+        var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        var fromQuery = {};
+        var params = new URLSearchParams(window.location.search);
+        keys.forEach(function (k) { if (params.get(k)) fromQuery[k] = params.get(k); });
+        if (Object.keys(fromQuery).length) {
+          try { sessionStorage.setItem('es_utm', JSON.stringify(fromQuery)); } catch (e) {}
+        }
+        var stored = {};
+        try { stored = JSON.parse(sessionStorage.getItem('es_utm') || '{}'); } catch (e) {}
+        var visitor = Object.keys(fromQuery).length ? fromQuery : stored;
+        try {
+          var url = new URL(widget.getAttribute('data-url'));
+          keys.forEach(function (k) {
+            if (visitor[k]) url.searchParams.set(k, visitor[k]);
+          });
+          widget.setAttribute('data-url', url.toString());
+          var fallback = document.querySelector('#book a[href*="calendly.com"]');
+          if (fallback) {
+            var furl = new URL(fallback.href);
+            keys.forEach(function (k) {
+              if (visitor[k]) furl.searchParams.set(k, visitor[k]);
+            });
+            fallback.href = furl.toString();
+          }
+        } catch (e) {}
+      })();
+      </script>
+      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </main>
 
